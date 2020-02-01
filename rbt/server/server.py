@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import time
-from server_channel import ServerChannel
+from rbt.server.server_channel import ServerChannel
 
 gameServer = ServerChannel()
 
