@@ -1,5 +1,9 @@
 import pygame
 
 class Map_Entities:
-    def __init___(self, pos):
+    
+    def set_pos(self, pos, type):
         self.pos = pos
+        self.type = type
+        
+        
