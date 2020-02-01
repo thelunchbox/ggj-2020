@@ -37,4 +37,4 @@ class Player():
         self.circle.render(screen, self.pos)
 
     def setPlayerFromState(self, playerState):
-        self.pos = playerState.pos
+        self.pos = playerState['pos']

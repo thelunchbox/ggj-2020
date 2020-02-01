@@ -10,7 +10,7 @@ class GameState():
     def getState(self):
         playerStates = {}
         for p in self.players.values():
-            playerStates[str(p.id)] = p.getState()
+            playerStates[p.id] = p.getState()
 
         return {
             "players": playerStates
@@ -23,10 +23,12 @@ class GameState():
         pass
 
     def setGameFromState(self, state):
+        # create any new player that doesn't exist
         for pState in state['players'].keys():
-            if (not self.players.get(pState.id, False)):
-                self.players[pState.id] = Player(pState.id)
+            if (not self.players.get(pState, False)):
+                self.players[pState] = Player(pState)
 
+        # update all the plrs
         for p in self.players.keys():
             self.players[p].setPlayerFromState(state["players"][p])
 

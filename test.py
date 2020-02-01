@@ -1,5 +1,6 @@
-x = {
-    1: 'hi'
+colorMap = {
+   1: (255,128,0),
+   2: (0,255,255)
 }
 
-print(x[1])
+print(colorMap['1'])

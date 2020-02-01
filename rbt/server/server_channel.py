@@ -43,7 +43,7 @@ class ServerChannel(Server):
         state = self.game.getState()
         if (len(state["players"].keys()) == self.maxPlayers):
             for c in self.connections.values():
-                print('sending game state to player', c.player.id, state)
+                # print('sending game state to player', c.player.id, state)
                 c.Send(serialize({ 
                     "action": "updateGameState",
                     "data": { "gameState" : state }
