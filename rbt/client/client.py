@@ -9,20 +9,16 @@ class Client():
         self.playerID = None
         self.game = GameState()
         self.serverConnection = ClientChannel(host, port, self)
-
-    def run(self):
         pygame.init()
         pygame.display.set_caption("REPAIR GAME")
         screen = pygame.display.set_mode((1500,1020))
 
-        ## Wait to start until I get an initial game state
-        ##################################################
+    def waitForPlayers(self):
+        print("Waiting for other players")
         while len(self.game.players.values()) != 2:
-            ## Get updates from the server
-            ##############################
-            print("Waiting for other players", len(self.game.players.values()), "found so far...")
             self.serverConnection.poll()
 
+    def gameLoop(self):
         done = False
         while not done:
 
@@ -31,7 +27,7 @@ class Client():
             # print("pump the server")
             self.serverConnection.poll()
 
-            ## Get inputs
+            ## Get Events
             #############
             for event in pygame.event.get():
                 if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_q]:
@@ -41,7 +37,6 @@ class Client():
                 ############################
                 if pygame.mouse.get_pressed()[0]:
                     coords = pygame.mouse.get_pos()
-                    print("Sending player update to server")
                     self.serverConnection.send("updatePlayer", { "pos": coords })
 
 
@@ -50,8 +45,13 @@ class Client():
             screen.fill((0,0,0))
             self.game.render(screen)
             pygame.display.flip()
-        
-        # when we're done...
-        pygame.display.quit()
 
+
+    def cleanup(self):
+        pygame.display.quit()
         print("Closing connection to server")
+
+    def run(self):
+        self.waitForPlayers()
+        self.gameLoop()
+        self.cleanup()
