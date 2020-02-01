@@ -13,3 +13,6 @@ class Player():
         bot = Bot();
         bots.add(bots);
         self.botCount+1;
+
+
+    #TODO: Own and render a circle
