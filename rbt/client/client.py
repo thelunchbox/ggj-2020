@@ -12,12 +12,13 @@ GAME_STATE = GameState()
 
 class Client(ConnectionListener):
     def __init__(self, host, port):
-       self.Connect((host, port))
-       print("client started")
+        self.Connect((host, port))
+        print("client started")
 
     def Network_updateGameState(self, data):
-       GAME_STATE.setGameFromState(deserialize(data)["gamestate"])
-       print("Got game state from server", GAME_STATE)
+        print(data)
+        GAME_STATE.setGameFromState(deserialize(data)["data"]["gameState"])
+        print("Got game state from server", GAME_STATE)
 
     def Network_setID(self, data):
         playerID = deserialize(data)["data"]["id"]

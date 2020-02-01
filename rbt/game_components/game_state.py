@@ -20,7 +20,7 @@ class GameState():
     def update(self):
         pass
 
-    def setGameFromState(state):
+    def setGameFromState(self, state):
         for p in self.players.keys():
             self.players[p].setPlayerFromState(state["players"][p])
 
