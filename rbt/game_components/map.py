@@ -1,41 +1,52 @@
 import pygame, os, random, copy
-WIDTH=10     # in tiles
-HEIGHT=10
+WIDTH=16     # in tiles
+HEIGHT=16
 board = []
-board_rects = []
+
+tiles = [
+ [ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,2 ],
+ [ 1,2,3,0, 2,0,1,2, 1,3,0,1, 2,1,3,2 ],
+ [ 2,3,0,2, 0,2,2,3, 3,3,2,2, 3,3,3,2 ],
+ [ 2,2,1,2, 2,1,2,2, 2,3,1,2, 2,2,3,2 ],
+
+ [ 3,1,0,2, 0,1,2,2, 3,3,1,2, 2,3,3,2 ],
+ [ 1,3,1,2, 0,3,2,2, 3,3,3,3, 0,0,0,0 ],
+ [ 2,3,0,2, 0,1,2,0, 1,3,1,3, 1,3,0,1 ],
+ [ 0,3,0,2, 0,0,2,3, 1,2,1,2, 3,3,2,2 ],
+
+ [ 2,3,0,2, 0,1,2,1, 0,2,0,2, 2,3,1,2 ],
+ [ 2,3,0,2, 0,3,2,3, 1,3,1,3, 3,3,1,2 ],
+ [ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,2 ],
+ [ 1,2,3,0, 2,0,1,2, 1,3,0,1, 2,1,3,2 ],
+
+ [ 2,3,0,2, 0,2,2,3, 3,3,2,2, 3,3,3,2 ],
+ [ 2,2,1,2, 2,1,2,2, 2,3,1,2, 2,2,3,2 ],
+ [ 3,1,0,2, 0,1,2,2, 3,3,1,2, 2,3,3,2 ],
+ [ 1,3,1,2, 0,3,2,2, 3,3,3,3, 0,0,0,0 ]
+]
+
+TILE_PATHS = [ "rbt/game_components/T_Path.png","rbt/game_components/L_Turn.png","rbt/game_components/Vertical_Path.png","rbt/game_components/Green_Clear.png" ]
+TILE_SURFACES = []
+for file in TILE_PATHS:
+    TILE_SURFACES.append(pygame.image.load(file))
+
 
 class Map():
-
-    def setBoard(self):
-        self.tile_paths = [ "rbt/game_components/T_Path.png","rbt/game_components/L_Turn.png","rbt/game_components/Vertical_Path.png","rbt/game_components/Green_Clear.png" ]
-        self.board       = [[0] * HEIGHT] * WIDTH
-        self.board_rects = [[0] * HEIGHT] * WIDTH
-        for x in range(WIDTH):
-            for y in range(HEIGHT):
-                #self.board[x][y] = random.choice(opts)
-                self.board[x][y] = pygame.image.load(random.choice(self.tile_paths))
-                #t0 = pygame.Rect(0,0,32,32).move([32*x,32*y])
-                #self.board_rects[x][y] = t0
-                print("here0 ",hex(id(self.board_rects[x][y])))
-
-        for x in range(WIDTH):
-            for y in range(HEIGHT):
-                print("init all rects id ", hex(id(self.board_rects[x][y])))
-
     def __init__(self):
-        self.surface = pygame.Surface((300,300))
-        self.surface.fill((255,100,100))
+        #self.surface = pygame.Surface((300,300))
+        #self.surface.fill((255,100,100))
         self.setBoard()
 
-    def set_pos(self, pos):
-        self.pos = pos
+    def setBoard(self):
+        self.board       = []
+        for x in range(WIDTH):
+            self.board.append([])
+            for y in range(HEIGHT):
+                self.board[x].append(TILE_SURFACES[tiles[x][y]])
+
 
     def render(self, screen):
-        print("all rects ", self.board_rects)
         for x in range(WIDTH):
             for y in range(HEIGHT):
-                #print(hex(id(self.board_rects[x][y])))
-                print(x,y,self.board_rects[x][y])
-                #screen.blit(self.board[x][y],self.board_rects[x][y])
-                screen.blit(self.board[x][y],[32*x,32*y,32,32])
+                screen.blit(self.board[x][y],(64*x,64*y,64,64))
 
