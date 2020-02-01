@@ -17,6 +17,7 @@ class ServerChannel(Server):
         print("Client connecting..")
         if len(self.game.players.keys()) < MAX_PLAYERS:
             p = Player(len(self.game.players.keys()) + 1)
+            self.game.playerSprites.pygame.sprite.add(p.playerSprites)
             response = {
                 "action": "setId",
                 "data": { "id": p.id }

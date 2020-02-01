@@ -19,6 +19,7 @@ class GameState():
         return False
 
     def update(self):
+        #TODO: detect collisions n stuff
         pass
 
     def setGameFromState(self, state):

@@ -23,13 +23,13 @@ class Player(pygame.sprite.Sprite):
         self.circle = Circle(PLAYER_COLORS[self.id])
         self.pos = (100,100)
 
-    # Create a bot and add it to the list of existing bots. Increment bot count by 1.
+    # Create a bot and add it to the list of existing bots.
     def create_bot(self, botID, slots):
-        resourceCost = 2 +  ( slots * 3 )
+        resourceCost = 2 + ( slots * 3 )
         if resourceCost <= self.resource:
             bot = Bot(botID, slots, self.playerID)
             self.bots.append(bot)
-            self.resource-=resourceCost
+            self.resource -= resourceCost
             return bot
 
     def get_bot(self, botID):
@@ -63,6 +63,8 @@ class Player(pygame.sprite.Sprite):
 
     def render(self, screen):
         self.circle.render(screen, self.pos)
+        for bot in self.bots:
+            bot.render()
 
 
     def setPlayerFromState(self, playerState):
