@@ -2,9 +2,10 @@
 import time
 from rbt.server.server_channel import ServerChannel
 
-gameServer = ServerChannel()
+def run(host, port):
+    gameServer = ServerChannel(localaddr=(host, port))
 
-while True:
-    gameServer.Pump()
-    time.sleep(0.0016)
-    gameServer.Process()
+    while True:
+        gameServer.Pump()
+        time.sleep(0.0016)
+        gameServer.Process()

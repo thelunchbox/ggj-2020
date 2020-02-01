@@ -5,16 +5,13 @@ from PodSixNet.Connection import connection
 from rbt.game_components import test_entities
 from rbt.game_components import player
 
-pygame.init()
-pygame.display.set_caption("REPAIR GAME")
-screen = pygame.display.set_mode((1500,1020))
 done = False
 playerID = None
 GAME_STATE = None
 
 class Client(ConnectionListener):
-    def __init__(self):
-       self.Connect()
+    def __init__(self, host, port):
+       self.Connect((host, port))
        print("client started")
 
     def Network_updateGameState(self, data):
@@ -47,58 +44,57 @@ class Client(ConnectionListener):
         print("You are now connected to the server")
 
 
-#circleObject = test_entities.Circle(1) #TODO: Use a game state object here instead
-
-
-## Establish server connection
-##############################
-serverConnection = Client()
-# connect to the server - optionally pass hostname and port like: ("mccormick.cx", 31425)
-
-
-## Wait to start until I get an initial game state
-##################################################
-while not GAME_STATE:
-    ## Get updates from the server
+def run(host, port):
+    ## Establish server connection
     ##############################
-    serverConnection.loop()
+    serverConnection = Client(host, port)
+    # connect to the server - optionally pass hostname and port like: ("mccormick.cx", 31425)
+
+    pygame.init()
+    pygame.display.set_caption("REPAIR GAME")
+    screen = pygame.display.set_mode((1500,1020))
+
+    ## Wait to start until I get an initial game state
+    ##################################################
+    while not GAME_STATE:
+        ## Get updates from the server
+        ##############################
+        serverConnection.loop()
 
 
-## GameLOOP!
-############
+    ## GameLOOP!
+    ############
 
-while not done:
+    while not done:
 
-    ## Get inputs
-    #############
+        ## Get inputs
+        #############
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_q]:
-            done = True
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_q]:
+                done = True
 
-        ## Send inputs to the server
-        ############################
-        if pygame.mouse.get_pressed()[0]:
-            coords = pygame.mouse.get_pos()
-            #circleObject.set_pos(coords) #TODO: Send click to server instead (command, pos) { "command": "click", "data": {"x": 11, "y": 11} }
-            print("Sending player update to server")
-            connection.Send("updatePlayer", { "pos": coords })
-
-
-    ## Get updates from the server
-    ##############################
-    print("pump the server")
-    serverConnection.loop()
+            ## Send inputs to the server
+            ############################
+            if pygame.mouse.get_pressed()[0]:
+                coords = pygame.mouse.get_pos()
+                print("Sending player update to server")
+                connection.Send("updatePlayer", { "pos": coords })
 
 
-
-    ## Render the screen
-    ####################
-    screen.fill((0,0,0))
-    #circleObject.render(screen)
-    pygame.display.flip()
+        ## Get updates from the server
+        ##############################
+        print("pump the server")
+        serverConnection.loop()
 
 
-pygame.display.quit()
 
-print("Closing connection to server")
+        ## Render the screen
+        ####################
+        screen.fill((0,0,0))
+        pygame.display.flip()
+
+
+    pygame.display.quit()
+
+    print("Closing connection to server")
