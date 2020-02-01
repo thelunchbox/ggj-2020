@@ -1,5 +1,5 @@
 from PodSixNet.Server import Server
-from channel import ClientChannel
+from rbt.server.channel import ClientChannel
 from rbt.game_components.game_state import GameState
 from rbt.game_components.player import Player
 
