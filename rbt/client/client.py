@@ -11,7 +11,7 @@ class Client():
         self.serverConnection = ClientChannel(host, port, self)
         pygame.init()
         pygame.display.set_caption("REPAIR GAME")
-        screen = pygame.display.set_mode((1500,1020))
+        self.screen = pygame.display.set_mode((1500,1020))
 
     def waitForPlayers(self):
         print("Waiting for other players")
@@ -42,8 +42,8 @@ class Client():
 
             ## Render the screen
             ####################
-            screen.fill((0,0,0))
-            self.game.render(screen)
+            self.screen.fill((0,0,0))
+            self.game.render(self.screen)
             pygame.display.flip()
 
 
