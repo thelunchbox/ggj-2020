@@ -24,6 +24,10 @@ class Client(ConnectionListener):
         playerID = deserialize(data)["data"]["id"]
         print("Got id from server", playerID)
 
+    def Network_gameAborted(self, data):
+        print("Game has been cancelled!")
+        exit()
+
     def send(self, action, data):
         connection.Send(serialize({"action": action, "data": data}))
 
