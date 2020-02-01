@@ -14,4 +14,4 @@ class ClientChannel(Channel):
         self._server.RemovePlayer(self)
 
     def Network_updatePlayer(self, data):
-        self.player.setPosition(deserialize(data)["pos"]) # simply update the coordinates of the player for now
+        self.player.pos = data['data']["pos"] # simply update the coordinates of the player for now

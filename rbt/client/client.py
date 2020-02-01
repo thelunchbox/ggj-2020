@@ -17,7 +17,7 @@ class Client(ConnectionListener):
 
     def Network_updateGameState(self, data):
         GAME_STATE.setGameFromState(deserialize(data)["data"]["gameState"])
-        print("Got game state from server", data)
+        # print("Got game state from server", data)
 
     def Network_setID(self, data):
         playerID = deserialize(data)["data"]["id"]
@@ -75,7 +75,7 @@ def run(host, port):
 
         ## Get updates from the server
         ##############################
-        print("pump the server")
+        # print("pump the server")
         serverConnection.poll()
 
         ## Get inputs
@@ -90,7 +90,7 @@ def run(host, port):
             if pygame.mouse.get_pressed()[0]:
                 coords = pygame.mouse.get_pos()
                 print("Sending player update to server")
-                serverConnection.Send("updatePlayer", { "pos": coords })
+                serverConnection.send("updatePlayer", { "pos": coords })
 
 
         ## Render the screen
