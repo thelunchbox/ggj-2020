@@ -7,11 +7,11 @@ sachin was here
 ## Running the game
 
 Start the server by running
-`python3 ./server/main`
+`python3 ./server/main.py`
 from the root directory.
 
 Then start the client by running
-`python3 ./client/main`
+`python3 ./client/main.py`
 from the root directory.
 
 To quit the client, type `q`.
