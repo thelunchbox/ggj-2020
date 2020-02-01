@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.playerID = playerID
         self.connection = 0
         self.address = 0
-        self.resource = 50
+        self.resource = 500
         self.bots = []
 
     # Create a bot and add it to the list of existing bots. Increment bot count by 1.
@@ -41,7 +41,6 @@ class Player(pygame.sprite.Sprite):
         blue = (0, 0, 128)
         font = pygame.font.Font('freesansbold.ttf', 32)
         text = font.render( str("hi"), False, (0, 0, 0))
-        print("printing resource")
 
     def draw(self):
         self.draw_resource()

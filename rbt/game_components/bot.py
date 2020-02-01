@@ -14,7 +14,7 @@ class Bot(pygame.sprite.Sprite):
         self.rect.centerx = 50
         self.rect.bottom = 50
         self.slots = slots
-        self.speed = 2
+        self.speed = 3
         self.direction = (0,0)
         self.ttl = 32000 #TODO: replace with config
         self.inventory = []
