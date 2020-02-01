@@ -27,6 +27,16 @@ class ServerChannel(Server):
             self.game.players[p.id] = p
             channel.player = p
             self.connections[p.id] = channel
+    
+    def RemovePlayer(self, connection):
+        del self.connections[connection.player.id]
+        for c in self.connections.values():
+            print('sending abort message to player', c.player.id)
+            c.Send(serialize({ 
+                "action": "gameAborted"
+            }))
+        print('Ending game because someone wussed out')
+        exit()
 
     def Process(self):
         self.game.update()

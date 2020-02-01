@@ -12,10 +12,6 @@ class Player():
         self.id = id
         self.resource = 0
         self.botCount = 0
-        self.position = {
-            "x": 0,
-            "y": 0
-        }
         self.inputs = {}
 
         # TESTING: REMOVE LATER
@@ -31,7 +27,7 @@ class Player():
     def getState(self):
         return {
             "id": self.id,
-            "pos": self.position
+            "pos": self.pos
         }
     
     def captureInput(self, inputs):
