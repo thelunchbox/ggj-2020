@@ -61,7 +61,7 @@ def run(host, port):
 
     ## Wait to start until I get an initial game state
     ##################################################
-    while len(GAME_STATE.players.values()) != 1:
+    while len(GAME_STATE.players.values()) != 2:
         ## Get updates from the server
         ##############################
         print("Waiting for other players", len(GAME_STATE.players.values()), "found so far...")
