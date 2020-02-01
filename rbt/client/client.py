@@ -1,6 +1,9 @@
 import pygame
 import time
+import socket
+import json
 from rbt.game_components import test_entities
+from rbt.game_components import player
 
 pygame.init()
 pygame.display.set_caption("REPAIR GAME")
@@ -9,11 +12,22 @@ done = False
 
 
 
-#TODO: establish server connection
+## Establish server connection
+##############################
+gameServer = socket.socket()         # Create a socket object
+host = socket.gethostname()                # Get local machine name
+port = 12345                               # Reserve a port for your service.
+gameServer.connect((host, port))
 
-#TODO: Get my player ID from the server
+## Get my player ID from the server
+###################################
+message = json.loads(gameServer.recv(1024).decode('utf-8'))
 
-#TODO: wait to start until I get an initial game state
+myPlayer = player.Player(msg["playerID"])
+
+## Wait to start until I get an initial game state
+##################################################
+serverState = json.loads(gameServer.recv(1024).decode('utf-8'))
 
 circleObject = test_entities.Circle(1) #TODO: Use a game state object here instead
 
@@ -49,3 +63,5 @@ while not done:
 
 
 pygame.display.quit()
+
+gameServer.close()
