@@ -8,15 +8,20 @@ colorMap = {
 
 # This class represents the player
 class Player():
-    def __init__(self, playerID):
-        self.playerID = playerID
-        self.connection = 0
-        self.address = 0
+    def __init__(self, connection, addr, id):
+        self.id = id
+        self.connection = connection
+        self.address = addr
         self.resource = 0
         self.botCount = 0
+        self.position = {
+            "x": 0,
+            "y": 0
+        }
+        self.inputs = {}
 
         # TESTING: REMOVE LATER
-        self.circle = Circle(colorMap[playerID])
+        self.circle = Circle(colorMap[id])
         self.pos = (100,100)
 
     # Create a bot and add it to the list of existing bots. Increment bot count by 1.
@@ -25,9 +30,17 @@ class Player():
         bots.add(bots);
         self.botCount+1;
 
+    def getState(self):
+        return {
+            "id": str(self.id),
+            "position": self.position
+        }
+    
+    def captureInput(self, inputs):
+        self.inputs = inputs
 
      def render(self, screen):
         self.circle.render(screen. self.pos)
 
      def setPlayerFromState(self, gameState):
-        self.pos = gameState["players"][playerID].pos
+        self.pos = gameState["players"][id].pos

@@ -2,6 +2,8 @@
 
 import socket               # Import socket module
 import json                 # import json module... duh
+from rbt.game_components.game_state import GameState
+from rbt.game_components.player import Player
 
 s = socket.socket()         # Create a socket object
 host = socket.gethostname() # Get local machine name
@@ -14,17 +16,20 @@ x = {
     "tail": "pony"
 }
 
-players = []
+game = GameState()
 maxPlayers = 1
 
 s.listen(5)                 # Now wait for client connection.
-while len(players) < maxPlayers:
+while len(game.players) < maxPlayers:
    c, addr = s.accept()     # Establish connection with client. This is synchronous and blocks the thread!
    print('Got connection from', addr)
-   c.send(json.dumps(x).encode('utf-8'))
-   players.append(c)    # this will eventually be a new Player object
+   p = Player(c, addr, len(game.players) + 1)
+   response = {
+       "id": p.id
+   }
+   p.connection.send(json.dumps(response).encode('utf-8'))
+   game.players.append(p)
 
-# create a new Game object
 # while not game.isOver():
     # for p in players:
         # p.captureInput(json.loads(c.recv(1024).decode('utf-8')))
@@ -38,6 +43,6 @@ while len(players) < maxPlayers:
 # when the game is over, I tell the players the game is over
 # maybe we start a new game automatically after X seconds?
 
-for c in players:
-    c.send('{ "close": true }'.encode('utf-8'))
-    c.close()                # Close the connection
+for p in game.players:
+    p.connection.send('{ "close": true }'.encode('utf-8'))
+    p.connection.close()                # Close the connection
