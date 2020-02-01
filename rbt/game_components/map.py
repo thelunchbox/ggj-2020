@@ -4,7 +4,7 @@ HEIGHT=16
 board = []
 
 tiles = [
- [ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,2 ],
+ [ 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0 ],
  [ 1,2,3,0, 2,0,1,2, 1,3,0,1, 2,1,3,2 ],
  [ 2,3,0,2, 0,2,2,3, 3,3,2,2, 3,3,3,2 ],
  [ 2,2,1,2, 2,1,2,2, 2,3,1,2, 2,2,3,2 ],
@@ -30,6 +30,11 @@ TILE_SURFACES = []
 for file in TILE_PATHS:
     TILE_SURFACES.append(pygame.image.load(file))
 
+class Tile():
+    def __init__(self, config, entities):
+        self.surface = pygame.image.load(config.tileImage)
+        self.openPaths = config.openPaths
+        self.gameEntities = entities
 
 class Map():
     def __init__(self):
