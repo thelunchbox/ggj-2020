@@ -1,3 +1,5 @@
+from rbt.game_components.player import Player
+
 class GameState():
     def __init__(self):
         # list of players (max=2 for now)
@@ -21,6 +23,10 @@ class GameState():
         pass
 
     def setGameFromState(self, state):
+        for pState in state['players'].keys():
+            if (not self.players.get(pState.id, False)):
+                self.players[pState.id] = Player(pState.id)
+
         for p in self.players.keys():
             self.players[p].setPlayerFromState(state["players"][p])
 
