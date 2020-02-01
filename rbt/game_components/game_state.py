@@ -1,29 +1,21 @@
-
-import test_entities
-
 class GameState():
     def __init__(self):
-        self.player1 = Circle(1)
-        self.player2 = Circle(2)
-
-
-        #TODO: List of player objects
+        # list of players (max=2 for now)
+        self.players = []
         #TODO: Map object
         #TODO: End Game
 
-        #TODO: Add serializing method
-        #TODO: Add set by game state serialization
+    #TODO: Add serializing method
+    def getState(self):
+        playerStates = []
+        for p in self.players:
+            playerStates.append(p.getState())
 
-
-#{
-#    players: [
-#        {
-#            id: 1,
-#            pos: (x,y)
-#        },
-#        {
-#            id: 2,
-#            pos: (x,y)
-#        },
-#    ]
-#}
+        return {
+            "players": playerStates
+        }
+    
+    def isOver()
+        return False
+    
+    #TODO: Add set by game state serialization
