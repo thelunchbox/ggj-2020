@@ -10,12 +10,13 @@ If you're a windows scrub, run `pip install pygame` in the root directory.
 
 ## Running the game
 
-Start the server by running
-`python3 ./server/main.py` or try `python ./server/main.py` if you're a windows scrub
-from the root directory.
+Start the server by running the following command from the root directory.
+osx: `python3 ./rbt/server/server.py`
+windows: `python ./rbt/server/server.py`
 
-Then start the client by running
-`python3 ./client/main.py` or try `python ./client/main.py` if you're a windows scrub
-from the root directory.
+
+Then start the client by running the following command from the root directory.
+osx: `python3 ./main.py`
+windows: `python ./main.py`
 
 To quit the client, type `q`.
