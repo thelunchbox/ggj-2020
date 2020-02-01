@@ -20,13 +20,13 @@ class ServerChannel(Server):
             p = Player(len(self.game.players.keys()) + 1)
             response = {
                 "action": "setId",
-                "data": { "id": str(p.id) }
+                "data": { "id": p.id }
             }
             print('sending id to player', p.id, response)
             channel.Send(serialize(response))
-            self.game.players[str(p.id)] = p
+            self.game.players[p.id] = p
             channel.player = p
-            self.connections[str(p.id)] = channel
+            self.connections[p.id] = channel
 
     def Process(self):
         self.game.update()

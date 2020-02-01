@@ -5,7 +5,6 @@ class GameState():
         #TODO: Map object
         #TODO: End Game
 
-    #TODO: Add serializing method
     def getState(self):
         playerStates = {}
         for p in self.players.values():
@@ -20,8 +19,10 @@ class GameState():
 
     def update(self):
         pass
-    
-    #TODO: Add set by game state serialization
+
+    def setGameFromState(state):
+        for p in self.players.keys():
+            self.players[p].setPlayerFromState(state["players"][p])
 
     def render(self, screen):
         for p in self.players.values():

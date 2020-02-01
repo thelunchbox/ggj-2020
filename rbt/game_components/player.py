@@ -1,10 +1,10 @@
 from rbt.game_components.bot import Bot
 from rbt.game_components.test_entities import Circle #TODO: Testing -> Remove later
 
-#colorMap = {
-#    "1": (255,0,0),
-#    "2": (0,255,0)
-#}
+colorMap = {
+   1: (255,0,0),
+   2: (0,255,0)
+}
 
 # This class represents the player
 class Player():
@@ -19,7 +19,7 @@ class Player():
         self.inputs = {}
 
         # TESTING: REMOVE LATER
-        self.circle = Circle((255,0,0))
+        self.circle = Circle(colorMap[self.id])
         self.pos = (100,100)
 
     # Create a bot and add it to the list of existing bots. Increment bot count by 1.
@@ -30,7 +30,7 @@ class Player():
 
     def getState(self):
         return {
-            "id": str(self.id),
+            "id": self.id,
             "pos": self.position
         }
     
