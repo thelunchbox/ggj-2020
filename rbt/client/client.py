@@ -4,6 +4,8 @@ from PodSixNet.Connection import ConnectionListener
 from PodSixNet.Connection import connection
 from rbt.game_components import test_entities
 from rbt.game_components import player
+from rbt.utils.utils import serialize
+from rbt.utils.utils import deserialize
 
 done = False
 playerID = None
@@ -15,15 +17,15 @@ class Client(ConnectionListener):
        print("client started")
 
     def Network_updateGameState(self, data):
-       GAME_STATE = data["gamestate"]
+       GAME_STATE = deserialize(data)["gamestate"]
        print("Got game state from server", GAME_STATE)
 
     def Network_setID(self, data):
-        playerID = data["data"]["id"]
+        playerID = deserialize(data)["data"]["id"]
         print("Got id from server", playerID)
 
     def send(self, action, data):
-        connection.Send({"action": action, "data": data})
+        connection.Send(serialize({"action": action, "data": data}))
 
     # Built ins
     ###########
