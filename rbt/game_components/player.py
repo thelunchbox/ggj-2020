@@ -2,7 +2,6 @@ import pygame
 
 from rbt.game_components.bot import Bot
 
-
 # This class represents the player
 
 class Player(pygame.sprite.Sprite):
@@ -15,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.address = 0
         self.resource = 500
         self.bots = []
+        self.inputs = {}
 
     # Create a bot and add it to the list of existing bots. Increment bot count by 1.
     def create_bot(self, botID, slots):
@@ -45,10 +45,14 @@ class Player(pygame.sprite.Sprite):
     def draw(self):
         self.draw_resource()
 
+    def getState(self):
+        return {
+            "id": self.id,
+            "pos": self.pos
+        }
 
+    def captureInput(self, inputs):
+        self.inputs = inputs
 
-
-
-
-
-
+    def setPlayerFromState(self, playerState):
+        self.pos = playerState['pos']
