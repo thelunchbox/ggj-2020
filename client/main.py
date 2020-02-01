@@ -20,6 +20,10 @@ class Circle():
 circleObject = Circle()
 
 while not done:
+
+    ## Get inputs
+    #############
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_q]:
             done = True
@@ -28,6 +32,17 @@ while not done:
             coords = pygame.mouse.get_pos()
             circleObject.set_pos(coords)
 
+
+    ## Send inputs to the server
+    ############################
+
+
+    ## Get updates from the server
+    ##############################
+
+
+    ## Render the screen
+    ###################
     screen.fill((0,0,0))
     circleObject.render(screen)
     pygame.display.flip()
