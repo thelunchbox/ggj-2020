@@ -1,51 +1,58 @@
 import pygame
 import time
-from rbt.game_components import test_entities
+from rbt.client.clientChannel import ClientChannel
+from rbt.game_components.game_state import GameState
+from rbt.game_components import player
+from rbt.utils.constants import MAX_PLAYERS
 
-pygame.init()
-pygame.display.set_caption("REPAIR GAME")
-screen = pygame.display.set_mode((1500,1020))
-done = False
+class Client():
+    def __init__(self, host, port):
+        self.playerID = None
+        self.game = GameState()
+        self.serverConnection = ClientChannel(host, port, self)
+        pygame.init()
+        pygame.display.set_caption("REPAIR GAME")
+        self.screen = pygame.display.set_mode((1500,1020))
 
+    def waitForPlayers(self):
+        print("Waiting for other players")
+        while len(self.game.players.values()) != MAX_PLAYERS:
+            self.serverConnection.poll()
 
+    def gameLoop(self):
+        done = False
+        while not done:
 
-#TODO: establish server connection
+            ## Get updates from the server
+            ##############################
+            # print("pump the server")
+            self.serverConnection.poll()
 
-#TODO: Get my player ID from the server
+            ## Get Events
+            #############
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_q]:
+                    done = True
 
-#TODO: wait to start until I get an initial game state
-
-circleObject = test_entities.Circle(1) #TODO: Use a game state object here instead
-
-while not done:
-
-    ## Get inputs
-    #############
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_q]:
-            done = True
-
-
-
-    ## Send inputs to the server
-    ############################
-        if pygame.mouse.get_pressed()[0]:
-            coords = pygame.mouse.get_pos()
-            circleObject.set_pos(coords) #TODO: Send click to server instead (command, pos) { "command": "click", "data": {"x": 11, "y": 11} }
-
-
-    ## Get updates from the server
-    ##############################
-
-    #TODO: Get game state from server and update my game state
-
-
-    ## Render the screen
-    ####################
-    screen.fill((0,0,0))
-    circleObject.render(screen)
-    pygame.display.flip()
+                ## Send inputs to the server
+                ############################
+                if pygame.mouse.get_pressed()[0]:
+                    coords = pygame.mouse.get_pos()
+                    self.serverConnection.send("updatePlayer", { "pos": coords })
 
 
-pygame.display.quit()
+            ## Render the screen
+            ####################
+            self.screen.fill((0,0,0))
+            self.game.render(self.screen)
+            pygame.display.flip()
+
+
+    def cleanup(self):
+        pygame.display.quit()
+        print("Closing connection to server")
+
+    def run(self):
+        self.waitForPlayers()
+        self.gameLoop()
+        self.cleanup()
