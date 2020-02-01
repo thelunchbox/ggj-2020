@@ -2,6 +2,7 @@ from PodSixNet.Server import Server
 from rbt.server.channel import ClientChannel
 from rbt.game_components.game_state import GameState
 from rbt.game_components.player import Player
+from rbt.utils.utils import serialize
 
 class ServerChannel(Server):
     channelClass = ClientChannel
@@ -22,7 +23,7 @@ class ServerChannel(Server):
                 "data": { "id": str(p.id) }
             }
             print('sending id to player', p.id, response)
-            channel.Send(response)
+            channel.Send(serialize(response))
             self.game.players[str(p.id)] = p
             channel.player = p
             self.connections[str(p.id)] = channel
@@ -33,10 +34,10 @@ class ServerChannel(Server):
         if (len(state["players"].keys()) == self.maxPlayers):
             for c in self.connections.values():
                 print('sending game state to player', c.player.id, state)
-                c.Send({ 
+                c.Send(serialize({ 
                     "action": "updateGameState",
                     "data": { "gameState" : state }
-                })
+                }))
         else:
             pass
             #print('ignoring unready game state')

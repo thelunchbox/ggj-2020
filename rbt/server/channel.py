@@ -1,5 +1,6 @@
 import json
 from PodSixNet.Channel import Channel
+from rbt.utils.utils import deserialize
 
 class ClientChannel(Channel):
     def __init__(self, *args, **kwargs):
@@ -10,4 +11,4 @@ class ClientChannel(Channel):
         pass
 
     def Network_updatePlayer(self, data):
-        self.player.setPosition(data["pos"]) # simply update the coordinates of the player for now
+        self.player.setPosition(deserialize(data)["pos"]) # simply update the coordinates of the player for now
