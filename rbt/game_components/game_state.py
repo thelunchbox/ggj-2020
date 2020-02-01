@@ -9,7 +9,7 @@ class GameState():
     def getState(self):
         playerStates = {}
         for p in self.players.values():
-            playerStates[str(p.id)] = p.getState()
+            playerStates[p.id] = p.getState()
 
         return {
             "players": playerStates
@@ -22,3 +22,6 @@ class GameState():
         pass
     
     #TODO: Add set by game state serialization
+    def setGameFromState(state):
+        for p in self.players.keys():
+            self.players[p].setPlayerFromState(state["players"][p])
