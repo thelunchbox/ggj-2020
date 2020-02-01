@@ -16,7 +16,6 @@ class Client(ConnectionListener):
         print("client started")
 
     def Network_updateGameState(self, data):
-
         GAME_STATE.setGameFromState(deserialize(data)["data"]["gameState"])
         print("Got game state from server", data)
 
@@ -62,9 +61,10 @@ def run(host, port):
 
     ## Wait to start until I get an initial game state
     ##################################################
-    while not (GAME_STATE.players.values) == 1:
+    while len(GAME_STATE.players.values()) != 1:
         ## Get updates from the server
         ##############################
+        print("Waiting for other players", len(GAME_STATE.players.values()), "found so far...")
         serverConnection.poll()
 
     done = False
