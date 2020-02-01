@@ -1,103 +1,57 @@
 import pygame
 import time
-from PodSixNet.Connection import ConnectionListener
-from PodSixNet.Connection import connection
+from rbt.client.clientChannel import ClientChannel
 from rbt.game_components.game_state import GameState
 from rbt.game_components import player
 
-playerID = None
-GAME_STATE = GameState()
-
-class Client(ConnectionListener):
+class Client():
     def __init__(self, host, port):
-        self.Connect((host, port))
-        print("client started")
+        self.playerID = None
+        self.game = GameState()
+        self.serverConnection = ClientChannel(host, port, self)
 
-    def Network_updateGameState(self, data):
-        GAME_STATE.setGameFromState(data["data"]["gameState"])
-        # print("Got game state from server", data)
+    def run(self):
+        pygame.init()
+        pygame.display.set_caption("REPAIR GAME")
+        screen = pygame.display.set_mode((1500,1020))
 
-    def Network_setID(self, data):
-        playerID = data["data"]["id"]
-        print("Got id from server", playerID)
+        ## Wait to start until I get an initial game state
+        ##################################################
+        while len(self.game.players.values()) != 2:
+            ## Get updates from the server
+            ##############################
+            print("Waiting for other players", len(self.game.players.values()), "found so far...")
+            self.serverConnection.poll()
 
-    def Network_gameAborted(self, data):
-        print("Game has been cancelled!")
-        exit()
+        done = False
+        while not done:
 
-    def send(self, action, data):
-        connection.Send({"action": action, "data": data})
+            ## Get updates from the server
+            ##############################
+            # print("pump the server")
+            self.serverConnection.poll()
 
-    def poll(self):
-        connection.Pump()
-        self.Pump()
+            ## Get inputs
+            #############
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_q]:
+                    done = True
 
-    # Built ins
-    ###########
-
-    def Network_error(self, data):
-        print('error:', data['error'])
-        connection.Close()
-
-    def Network_disconnected(self, data):
-        print('Server disconnected')
-        exit()
-
-    def Network_connected(self, data):
-        print("You are now connected to the server")
-
-
-def run(host, port):
-    ## Establish server connection
-    ##############################
-    serverConnection = Client(host, port)
-    # connect to the server - optionally pass hostname and port like: ("mccormick.cx", 31425)
-
-    pygame.init()
-    pygame.display.set_caption("REPAIR GAME")
-    screen = pygame.display.set_mode((1500,1020))
-
-    ## Wait to start until I get an initial game state
-    ##################################################
-    while len(GAME_STATE.players.values()) != 2:
-        ## Get updates from the server
-        ##############################
-        print("Waiting for other players", len(GAME_STATE.players.values()), "found so far...")
-        serverConnection.poll()
-
-    done = False
-    ## GameLOOP!
-    ############
-
-    while not done:
-
-        ## Get updates from the server
-        ##############################
-        # print("pump the server")
-        serverConnection.poll()
-
-        ## Get inputs
-        #############
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_q]:
-                done = True
-
-            ## Send inputs to the server
-            ############################
-            if pygame.mouse.get_pressed()[0]:
-                coords = pygame.mouse.get_pos()
-                print("Sending player update to server")
-                serverConnection.send("updatePlayer", { "pos": coords })
+                ## Send inputs to the server
+                ############################
+                if pygame.mouse.get_pressed()[0]:
+                    coords = pygame.mouse.get_pos()
+                    print("Sending player update to server")
+                    self.serverConnection.send("updatePlayer", { "pos": coords })
 
 
-        ## Render the screen
-        ####################
-        screen.fill((0,0,0))
-        GAME_STATE.render(screen)
-        pygame.display.flip()
+            ## Render the screen
+            ####################
+            screen.fill((0,0,0))
+            self.game.render(screen)
+            pygame.display.flip()
+        
+        # when we're done...
+        pygame.display.quit()
 
-
-    pygame.display.quit()
-
-    print("Closing connection to server")
+        print("Closing connection to server")

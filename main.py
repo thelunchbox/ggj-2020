@@ -1,5 +1,5 @@
 import sys
-from rbt.client.client import run
+from rbt.client.client import Client
 
 
 if __name__ == '__main__':
@@ -8,4 +8,5 @@ if __name__ == '__main__':
         print("e.g.", sys.argv[0], "localhost:31425")
     else:
         host, port = sys.argv[1].split(":")
-        run(host, int(port))
+        client = Client(host, int(port))
+        client.run()
