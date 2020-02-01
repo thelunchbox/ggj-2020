@@ -1,6 +1,5 @@
 import json
 from PodSixNet.Channel import Channel
-from rbt.utils.utils import deserialize
 
 class ClientChannel(Channel):
     def __init__(self, *args, **kwargs):
