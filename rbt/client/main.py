@@ -1,23 +1,15 @@
 import pygame
 import time
+from rbt.game_components import test_entities
 
 pygame.init()
 pygame.display.set_caption("REPAIR GAME")
 screen = pygame.display.set_mode((1500,1020))
 done = False
 
-class Circle():
-    def __init__(self):
-        self.pos = (100,100)
-        self.surface = pygame.Surface((30,30))
-        self.surface.fill((255,100,100))
-    def set_pos(self, pos):
-        self.pos = pos
-    def render(self, screen):
-        screen.blit(self.surface, self.pos)
 
 
-circleObject = Circle()
+circleObject = test_entities.Circle(1)
 
 while not done:
 
