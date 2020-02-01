@@ -1,6 +1,7 @@
 import pygame
 import time
 from rbt.game_components import test_entities
+from rbt.game_components import map
 
 pygame.init()
 pygame.display.set_caption("REPAIR GAME")
@@ -16,6 +17,7 @@ done = False
 #TODO: wait to start until I get an initial game state
 
 circleObject = test_entities.Circle(1) #TODO: Use a game state object here instead
+m = map.Map()
 
 while not done:
 
@@ -44,6 +46,7 @@ while not done:
     ## Render the screen
     ####################
     screen.fill((0,0,0))
+    m.render(screen)
     circleObject.render(screen)
     pygame.display.flip()
 
