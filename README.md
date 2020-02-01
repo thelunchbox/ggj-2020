@@ -12,8 +12,8 @@ Also run `pip install PodSixNet`.
 ## Running the game
 
 Start the server by running the following command from the root directory.
-osx: `python3 ./rbt/server/server.py`
-windows: `python ./rbt/server/server.py`
+osx: `python3 ./server.py`
+windows: `python ./server.py`
 
 
 Then start the client by running the following command from the root directory.
