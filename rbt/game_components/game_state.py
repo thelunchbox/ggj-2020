@@ -2,7 +2,6 @@ from rbt.game_components.player import Player
 
 class GameState():
     def __init__(self):
-        # list of players (max=2 for now)
         self.players = {}
         #TODO: Map object
         #TODO: End Game

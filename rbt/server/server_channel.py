@@ -2,6 +2,7 @@ from PodSixNet.Server import Server
 from rbt.server.channel import ClientChannel
 from rbt.game_components.game_state import GameState
 from rbt.game_components.player import Player
+from rbt.utils.constants import MAX_PLAYERS
 
 class ServerChannel(Server):
     channelClass = ClientChannel
@@ -10,12 +11,11 @@ class ServerChannel(Server):
         print("Starting server...")
         Server.__init__(self, *args, **kwargs)
         self.game = GameState()
-        self.maxPlayers = 2
         self.connections = {}
 
     def Connected(self, channel, addr):
         print("Client connecting..")
-        if len(self.game.players.keys()) < self.maxPlayers:
+        if len(self.game.players.keys()) < MAX_PLAYERS:
             p = Player(len(self.game.players.keys()) + 1)
             response = {
                 "action": "setId",
@@ -40,7 +40,7 @@ class ServerChannel(Server):
     def Process(self):
         self.game.update()
         state = self.game.getState()
-        if (len(state["players"].keys()) == self.maxPlayers):
+        if (len(state["players"].keys()) == MAX_PLAYERS):
             for c in self.connections.values():
                 # print('sending game state to player', c.player.id, state)
                 c.Send({ 

@@ -3,6 +3,7 @@ import time
 from rbt.client.clientChannel import ClientChannel
 from rbt.game_components.game_state import GameState
 from rbt.game_components import player
+from rbt.utils.constants import MAX_PLAYERS
 
 class Client():
     def __init__(self, host, port):
@@ -15,7 +16,7 @@ class Client():
 
     def waitForPlayers(self):
         print("Waiting for other players")
-        while len(self.game.players.values()) != 2:
+        while len(self.game.players.values()) != MAX_PLAYERS:
             self.serverConnection.poll()
 
     def gameLoop(self):
