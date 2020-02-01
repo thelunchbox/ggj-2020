@@ -11,7 +11,7 @@ class ServerChannel(Server):
         print("Starting server...")
         Server.__init__(self, *args, **kwargs)
         self.game = GameState()
-        self.maxPlayers = 1
+        self.maxPlayers = 2
         self.connections = {}
 
     def Connected(self, channel, addr):
