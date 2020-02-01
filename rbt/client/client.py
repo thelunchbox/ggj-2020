@@ -7,7 +7,6 @@ from rbt.game_components import player
 from rbt.utils.utils import serialize
 from rbt.utils.utils import deserialize
 
-done = False
 playerID = None
 GAME_STATE = GameState()
 
@@ -27,12 +26,12 @@ class Client(ConnectionListener):
     def send(self, action, data):
         connection.Send(serialize({"action": action, "data": data}))
 
-    # Built ins
-    ###########
-
-    def loop(self):
+    def poll(self):
         connection.Pump()
         self.Pump()
+
+    # Built ins
+    ###########
 
     def Network_error(self, data):
         print('error:', data['error'])
@@ -58,12 +57,12 @@ def run(host, port):
 
     ## Wait to start until I get an initial game state
     ##################################################
-    while not GAME_STATE:
+    while not (GAME_STATE.players.values) == 1:
         ## Get updates from the server
         ##############################
-        serverConnection.loop()
+        serverConnection.poll()
 
-
+    done = False
     ## GameLOOP!
     ############
 
@@ -87,7 +86,7 @@ def run(host, port):
         ## Get updates from the server
         ##############################
         print("pump the server")
-        serverConnection.loop()
+        serverConnection.poll()
 
 
 
