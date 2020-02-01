@@ -1,3 +1,3 @@
 
 
-import rbt.client.main
+import rbt.client.client

@@ -34,7 +34,7 @@ while not done:
 
 
     ## Render the screen
-    ###################
+    ####################
     screen.fill((0,0,0))
     circleObject.render(screen)
     pygame.display.flip()
