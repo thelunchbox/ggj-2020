@@ -1,7 +1,7 @@
 import pygame
 import time
-import socket
-import json
+from PodSixNet.Connection import ConnectionListener
+from PodSixNet.Connection import connection
 from rbt.game_components import test_entities
 from rbt.game_components import player
 
@@ -11,25 +11,27 @@ screen = pygame.display.set_mode((1500,1020))
 done = False
 
 
+circleObject = test_entities.Circle(1) #TODO: Use a game state object here instead
+GAME_STATE =
 
 ## Establish server connection
 ##############################
-gameServer = socket.socket()         # Create a socket object
-host = socket.gethostname()                # Get local machine name
-port = 12345                               # Reserve a port for your service.
-gameServer.connect((host, port))
+# connect to the server - optionally pass hostname and port like: ("mccormick.cx", 31425)
+connection.Connect()
+
+class ClientListener(ConnectionListener):
+    def Network_update(data):
+        #Update GAME_STATE
+
+
 
 ## Get my player ID from the server
 ###################################
-message = json.loads(gameServer.recv(1024).decode('utf-8'))
-
-myPlayer = player.Player(msg["playerID"])
 
 ## Wait to start until I get an initial game state
 ##################################################
-serverState = json.loads(gameServer.recv(1024).decode('utf-8'))
 
-circleObject = test_entities.Circle(1) #TODO: Use a game state object here instead
+
 
 while not done:
 
@@ -47,12 +49,13 @@ while not done:
         if pygame.mouse.get_pressed()[0]:
             coords = pygame.mouse.get_pos()
             circleObject.set_pos(coords) #TODO: Send click to server instead (command, pos) { "command": "click", "data": {"x": 11, "y": 11} }
+            connection.Send({"action": "updatePlayer", "pos": coords})
 
 
     ## Get updates from the server
     ##############################
+    ClientListener.pump()
 
-    #TODO: Get game state from server and update my game state
 
 
     ## Render the screen
