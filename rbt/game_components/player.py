@@ -39,8 +39,8 @@ class Player():
     def captureInput(self, inputs):
         self.inputs = inputs
 
-     def render(self, screen):
+    def render(self, screen):
         self.circle.render(screen. self.pos)
 
-     def setPlayerFromState(self, gameState):
+    def setPlayerFromState(self, gameState):
         self.pos = gameState["players"][id].pos

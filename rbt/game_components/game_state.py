@@ -15,7 +15,10 @@ class GameState():
             "players": playerStates
         }
     
-    def isOver()
+    def isOver(self):
         return False
+
+    def update(self):
+        pass
     
     #TODO: Add set by game state serialization

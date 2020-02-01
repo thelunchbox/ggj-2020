@@ -7,6 +7,7 @@ sachin was here
 ## Setup
 
 If you're a windows scrub, run `pip install pygame` in the root directory.
+Also run `pip install PodSixNet`.
 
 ## Running the game
 
