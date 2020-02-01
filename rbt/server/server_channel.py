@@ -1,5 +1,3 @@
-import json
-
 from PodSixNet.Server import Server
 from channel import ClientChannel
 from rbt.game_components.game_state import GameState
@@ -10,21 +8,30 @@ class ServerChannel(Server):
     channelClass = ClientChannel
     game = GameState()
     maxPlayers = 1
+    connections = {}
     
     def Connected(self, channel, addr):
-        if len(self.game.players) < self.maxPlayers:
-            p = Player(channel, addr, len(self.game.players) + 1)
+        if len(self.game.players.keys()) < self.maxPlayers:
+            p = Player(len(self.game.players.keys()) + 1)
             response = {
-                "id": p.id
+                "action": "setId",
+                "data": { "id": p.id }
             }
-            p.connection.send(json.dumps(response).encode('utf-8'))
-            self.game.players.append(p)
+            print('sending id to player', p.id, response)
+            channel.send(response)
+            self.game.players[str(p.id)] = p
+            channel.player = p
+            self.connections[str(p.id)] = channel
 
     def Process(self):
-        for p in self.game.players:
-            p.captureInput(p.connection)
         self.game.update()
         state = self.game.getState()
-        stateBuffer = json.dumps(state).encode('utf-8')
-        for p in self.game.players:
-            p.sendUpdate(stateBuffer)
+        if (len(state["players"].keys()) == 2):
+            for c in self.connections.values():
+                print('sending game state to player', c.player.id, state)
+                c.send({ 
+                    "action": "updateGameState",
+                    "data": { "gameState" : state }
+                })
+        else:
+            print('ignoring unready game state')

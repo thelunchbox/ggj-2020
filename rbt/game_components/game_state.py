@@ -1,15 +1,15 @@
 class GameState():
     def __init__(self):
         # list of players (max=2 for now)
-        self.players = []
+        self.players = {}
         #TODO: Map object
         #TODO: End Game
 
     #TODO: Add serializing method
     def getState(self):
-        playerStates = []
-        for p in self.players:
-            playerStates.append(p.getState())
+        playerStates = {}
+        for p in self.players.values():
+            playerStates[str(p.id)] = p.getState()
 
         return {
             "players": playerStates

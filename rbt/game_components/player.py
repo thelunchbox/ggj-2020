@@ -8,10 +8,8 @@ colorMap = {
 
 # This class represents the player
 class Player():
-    def __init__(self, connection, addr, id):
+    def __init__(self, id):
         self.id = id
-        self.connection = connection
-        self.address = addr
         self.resource = 0
         self.botCount = 0
         self.position = {
@@ -33,14 +31,14 @@ class Player():
     def getState(self):
         return {
             "id": str(self.id),
-            "position": self.position
+            "pos": self.position
         }
     
     def captureInput(self, inputs):
         self.inputs = inputs
 
     def render(self, screen):
-        self.circle.render(screen. self.pos)
+        self.circle.render(screen, self.pos)
 
     def setPlayerFromState(self, gameState):
         self.pos = gameState["players"][id].pos

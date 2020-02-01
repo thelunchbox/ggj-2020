@@ -6,5 +6,5 @@ gameServer = ServerChannel()
 
 while True:
     gameServer.Pump()
-    time.sleep(0.0001)
+    time.sleep(0.0016)
     gameServer.Process()
