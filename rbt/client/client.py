@@ -2,14 +2,14 @@ import pygame
 import time
 from PodSixNet.Connection import ConnectionListener
 from PodSixNet.Connection import connection
-from rbt.game_components import test_entities
+from rbt.game_components.game_state import GameState
 from rbt.game_components import player
 from rbt.utils.utils import serialize
 from rbt.utils.utils import deserialize
 
 done = False
 playerID = None
-GAME_STATE = None
+GAME_STATE = GameState()
 
 class Client(ConnectionListener):
     def __init__(self, host, port):
@@ -17,7 +17,7 @@ class Client(ConnectionListener):
        print("client started")
 
     def Network_updateGameState(self, data):
-       GAME_STATE = deserialize(data)["gamestate"]
+       GAME_STATE.setGameFromState(deserialize(data)["gamestate"])
        print("Got game state from server", GAME_STATE)
 
     def Network_setID(self, data):
@@ -94,6 +94,7 @@ def run(host, port):
         ## Render the screen
         ####################
         screen.fill((0,0,0))
+        GAME_STATE.render(screen)
         pygame.display.flip()
 
 

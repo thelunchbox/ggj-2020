@@ -22,3 +22,7 @@ class GameState():
         pass
     
     #TODO: Add set by game state serialization
+
+    def render(self, screen):
+        for p in self.players.values():
+            p.render(screen)
