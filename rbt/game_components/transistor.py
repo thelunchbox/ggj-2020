@@ -2,8 +2,6 @@ from rbt.game_components import map_entities
 import pygame
 
 class Transistor(map_entities.Map_Entities):
-    def test(self):
-        print(1)
     
     # Requires a position, and unique transistor ID       
     def __init__(self, pos, ID, max):
@@ -11,10 +9,9 @@ class Transistor(map_entities.Map_Entities):
         self.surface = pygame.Surface((30,30))
         self.surface.fill((163,255,15))
         self.ID = ID
-        # The time it takes the transistor to regenerate its effect in milliseconds
-        self.regenerationTime = 1000
+        # This is the same as the transistor's value
         self.max = max
-        self.value = max
+        self.tearDown = False
         print('New transistor created with ID [' + self.ID + ' at:')
         print(self.pos[0:2])
         
@@ -23,9 +20,11 @@ class Transistor(map_entities.Map_Entities):
 
     def getState(self):
         return {
-
+            'pos': self.pos,
+            'max': self.max
         }
 
     def update(self):
-        pass
+        if (self.tearDown):
+            print("Now destroying transistor " + self.ID)
         

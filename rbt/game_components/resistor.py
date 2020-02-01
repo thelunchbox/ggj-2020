@@ -14,6 +14,7 @@ class Resistor(map_entities.Map_Entities):
         self.ID = ID
         # This value is compared to the Gremlin's TTL (avg 32000?)
         self.value = value
+        self.tearDown = False
         print('New resistor created with ID [' + self.ID + ' at:')
         print(self.pos[0:2])
 
@@ -34,5 +35,7 @@ class Resistor(map_entities.Map_Entities):
     def update(self):
         if (self.destroying):
             self.value -= RESISTOR_DAMAGE
+        if (self.tearDown):
+            print("Now destroying resistor " + self.ID)
         
         
