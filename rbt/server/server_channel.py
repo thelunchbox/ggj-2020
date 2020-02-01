@@ -4,13 +4,17 @@ from rbt.game_components.game_state import GameState
 from rbt.game_components.player import Player
 
 class ServerChannel(Server):
-    
     channelClass = ClientChannel
-    game = GameState()
-    maxPlayers = 1
-    connections = {}
-    
+
+    def __init__(self, *args, **kwargs):
+        print("Starting server...")
+        Server.__init__(self, *args, **kwargs)
+        self.game = GameState()
+        self.maxPlayers = 1
+        self.connections = {}
+
     def Connected(self, channel, addr):
+        print("Client connecting..")
         if len(self.game.players.keys()) < self.maxPlayers:
             p = Player(len(self.game.players.keys()) + 1)
             response = {
@@ -26,7 +30,7 @@ class ServerChannel(Server):
     def Process(self):
         self.game.update()
         state = self.game.getState()
-        if (len(state["players"].keys()) == 2):
+        if (len(state["players"].keys()) == self.maxPlayers):
             for c in self.connections.values():
                 print('sending game state to player', c.player.id, state)
                 c.send({ 
@@ -34,4 +38,5 @@ class ServerChannel(Server):
                     "data": { "gameState" : state }
                 })
         else:
-            print('ignoring unready game state')
+            pass
+            #print('ignoring unready game state')

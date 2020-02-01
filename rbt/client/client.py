@@ -12,14 +12,39 @@ done = False
 playerID = None
 GAME_STATE = None
 
-class ClientListener(ConnectionListener):
-    def Network_updateGameState(data):
+class Client(ConnectionListener):
+    def __init__(self):
+       self.Connect()
+       print("client started")
+
+    def Network_updateGameState(self, data):
        GAME_STATE = data["gamestate"]
        print("Got game state from server", GAME_STATE)
 
-    def Network_setID(data):
+    def Network_setID(self, data):
         playerID = data["data"]["id"]
         print("Got id from server", playerID)
+
+    def send(self, action, data):
+        connection.Send({"action": action, "data": data})
+
+    # Built ins
+    ###########
+
+    def loop(self):
+        connection.Pump()
+        self.Pump()
+
+    def Network_error(self, data):
+        print('error:', data['error'])
+        connection.Close()
+
+    def Network_disconnected(self, data):
+        print('Server disconnected')
+        exit()
+
+    def Network_connected(self, data):
+        print("You are now connected to the server")
 
 
 #circleObject = test_entities.Circle(1) #TODO: Use a game state object here instead
@@ -27,8 +52,8 @@ class ClientListener(ConnectionListener):
 
 ## Establish server connection
 ##############################
+serverConnection = Client()
 # connect to the server - optionally pass hostname and port like: ("mccormick.cx", 31425)
-connection.Connect()
 
 
 ## Wait to start until I get an initial game state
@@ -36,7 +61,7 @@ connection.Connect()
 while not GAME_STATE:
     ## Get updates from the server
     ##############################
-    ClientListener.pump()
+    serverConnection.loop()
 
 
 ## GameLOOP!
@@ -57,13 +82,13 @@ while not done:
             coords = pygame.mouse.get_pos()
             #circleObject.set_pos(coords) #TODO: Send click to server instead (command, pos) { "command": "click", "data": {"x": 11, "y": 11} }
             print("Sending player update to server")
-            connection.Send({"action": "updatePlayer", "data": { "pos": coords}})
+            connection.Send("updatePlayer", { "pos": coords })
 
 
     ## Get updates from the server
     ##############################
     print("pump the server")
-    ClientListener.pump()
+    serverConnection.loop()
 
 
 
@@ -76,5 +101,4 @@ while not done:
 
 pygame.display.quit()
 
-print("Closing connection to server)"
-gameServer.close()
+print("Closing connection to server")
