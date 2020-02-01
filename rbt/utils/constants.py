@@ -17,3 +17,6 @@ PLAYER_COLORS = {
     1: COLOR['orange'],
     2: COLOR['cyan']
 }
+
+CAPACITANCE_DRAIN = 50
+RESISTOR_DAMAGE = 50
