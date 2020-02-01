@@ -3,6 +3,9 @@ import pygame
 from rbt.game_components.bot import Bot
 
 # This class represents the player
+from rbt.game_components.test_entities import Circle
+from rbt.utils.constants import PLAYER_COLORS
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, playerID):
@@ -15,6 +18,10 @@ class Player(pygame.sprite.Sprite):
         self.resource = 500
         self.bots = []
         self.inputs = {}
+
+        # TESTING: REMOVE LATER
+        self.circle = Circle(PLAYER_COLORS[self.id])
+        self.pos = (100,100)
 
     # Create a bot and add it to the list of existing bots. Increment bot count by 1.
     def create_bot(self, botID, slots):
@@ -53,6 +60,10 @@ class Player(pygame.sprite.Sprite):
 
     def captureInput(self, inputs):
         self.inputs = inputs
+
+    def render(self, screen):
+        self.circle.render(screen, self.pos)
+
 
     def setPlayerFromState(self, playerState):
         self.pos = playerState['pos']
