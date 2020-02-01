@@ -8,8 +8,13 @@ host = socket.gethostname() # Get local machine name
 port = 12345                # Reserve a port for your service.
 
 s.connect((host, port))
-x = json.loads(s.recv(1024).decode('utf-8'))
-print("Name", x["name"])
-print("Is he beautiful", x["beautiful"])
-print("What kind of tail is his hair in?", x["tail"])
+
+msg = json.loads(s.recv(1024).decode('utf-8'))
+while not msg.get('close', False):
+    print("Name", msg["name"])
+    print("Is he beautiful", msg["beautiful"])
+    print("What kind of tail is his hair in?", msg["tail"])
+    msg = json.loads(s.recv(1024).decode('utf-8'))
+
+print('goodbye all my hard work')
 s.close()                     # Close the socket when done
