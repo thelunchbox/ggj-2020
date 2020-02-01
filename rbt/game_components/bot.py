@@ -27,12 +27,17 @@ class Bot(pygame.sprite.Sprite):
     def set_color(self, color):
         self.image.fill(color)
 
-    def update(self):
-        # self.direction = random.choice(((1,0), (0, 1), (-1, 0), (0, -1)))
+    def move(self):
+        #TODO : write better moving logic
         if self.owner == 1:
             self.rect.y+=self.speed
         else:
             self.rect.y-= self.speed
+
+    def update(self):
+        self.move()
+
+
 
 
 
