@@ -19,10 +19,10 @@ class ServerChannel(Server):
             p = Player(len(self.game.players.keys()) + 1)
             response = {
                 "action": "setId",
-                "data": { "id": p.id }
+                "data": { "id": str(p.id) }
             }
             print('sending id to player', p.id, response)
-            channel.send(response)
+            channel.Send(response)
             self.game.players[str(p.id)] = p
             channel.player = p
             self.connections[str(p.id)] = channel
@@ -33,7 +33,7 @@ class ServerChannel(Server):
         if (len(state["players"].keys()) == self.maxPlayers):
             for c in self.connections.values():
                 print('sending game state to player', c.player.id, state)
-                c.send({ 
+                c.Send({ 
                     "action": "updateGameState",
                     "data": { "gameState" : state }
                 })
