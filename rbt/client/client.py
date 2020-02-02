@@ -18,6 +18,8 @@ class Client():
         pygame.init()
         pygame.display.set_caption('BLUETOOTH BYTES')
         self.screen = pygame.display.set_mode(SCREEN_RESOLUTION)
+        pygame.mixer.music.load('BTB_Overture.wav')
+        pygame.mixer.music.play(-1)
 
     def waitForPlayers(self):
         print("Waiting for other players")
