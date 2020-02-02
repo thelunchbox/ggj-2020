@@ -66,6 +66,9 @@ class Tile():
         entityStates = {}
         for entity in self.gameEntities.values():
             entityStates[entity.id] = entity.getState()
+        return {
+            'entities': entityStates
+        }
 
     def getExit(self):
         pass
