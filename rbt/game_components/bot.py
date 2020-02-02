@@ -3,6 +3,7 @@ import random
 import operator
 
 from rbt.utils.constants import SIGNAL_DECAY
+from rbt.utils.utils import screenCoords
 
 # This class represents the robots that the player controls
 
@@ -66,7 +67,7 @@ class Bot():
             self.dead = True
 
     def render(self, screen):
-        screen.blit(self.image, self.pos)
+        screen.blit(self.image, screenCoords(self.pos))
 
     def interact(self, entity):
         pass
