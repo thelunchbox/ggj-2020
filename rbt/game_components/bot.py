@@ -21,7 +21,6 @@ class Bot():
         self.pos = pos
 
     def set_color(self, color):
-        print(color)
         self.image.fill(color)
 
     def getState(self):

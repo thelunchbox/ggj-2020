@@ -1,6 +1,6 @@
 SCREEN_RESOLUTION = (1500,1020)
 PORT = 3179
-MAX_PLAYERS = 1
+MAX_PLAYERS = 2
 COLOR = {
     'orange': (255,128,0),
     'blue': (0,0,255),

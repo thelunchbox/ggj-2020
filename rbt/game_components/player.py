@@ -34,7 +34,7 @@ class Player(pygame.sprite.Sprite):
             bot.set_pos((random.randrange(50, 1450), self.yStart))
             return bot
         else:
-            print('out of resources!')
+            print(self.id, 'player out of resources!')
 
     def get_bot(self, botID):
         for bot in self.bots:
@@ -73,7 +73,6 @@ class Player(pygame.sprite.Sprite):
                 bot = Bot(botID, playerState['bots'][botID]['slots'], self.id)
                 bot.set_color((0,255,0))
                 self.bots.append(bot)
-                print('how many bots do you wish', len(self.bots))
 
         for bot in self.bots:
             bot.setBotFromState(playerState['bots'][bot.botID])
