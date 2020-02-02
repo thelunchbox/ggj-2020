@@ -40,8 +40,13 @@ class Client():
                 ############################
                 if pygame.mouse.get_pressed()[0]:
                     coords = mapCoords(pygame.mouse.get_pos())
-                    if (self.game.map.isSpawn(coords, self.playerID)):
-                        self.serverConnection.send("deployBot", { "pos": coords })
+                    if (coords[0] < 16 and coords[1] < 16 and coords[0] >= 0 and coords[1] >= 0):
+                        # this is a click on the MAP
+                        if (self.game.map.isSpawn(coords, self.playerID)):
+                            self.serverConnection.send("deployBot", { "pos": coords })
+                    else:
+                        pass # here we process clicks on the UI elements
+                    
                 keystate = pygame.key.get_pressed()
 
                 if keystate[pygame.K_1]:
