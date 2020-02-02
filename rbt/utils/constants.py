@@ -77,22 +77,29 @@ TILE_MAP = {
     8: "trisouth",
     9: "trieast",
     10: "clover", # connects all
-    11: "blank" #connects none
+    11: "blank", #connects none
+    12: "northend",
+    13: "southend",
+    14: "eastend",
+    15: "westend"
 }
 
 TILE_PATHS = [
-    "rbt/images/tiles/Vertical_64.png",
-    "rbt/images/tiles/Horizontal_64.png",
-    "rbt/images/tiles/L_Turn_64-3.png",
-    "rbt/images/tiles/L_Turn_64-2.png",
-    "rbt/images/tiles/L_Turn_64-1.png",
-    "rbt/images/tiles/L_Turn_64-4.png",
-    "rbt/images/tiles/T_Path_64-2.png",
-    "rbt/images/tiles/T_Path_64-1.png",
-    "rbt/images/tiles/T_Path_64-4.png",
-    "rbt/images/tiles/T_Path_64-3.png",
-    "rbt/images/tiles/4_Way_64.png",
-    "rbt/images/tiles/Blank_64.png"
+    "rbt/images/tiles/original/Vertical_64.png",
+    "rbt/images/tiles/original/Horizontal_64.png",
+    "rbt/images/tiles/original/L_Turn_64-3.png",
+    "rbt/images/tiles/original/L_Turn_64-2.png",
+    "rbt/images/tiles/original/L_Turn_64-1.png",
+    "rbt/images/tiles/original/L_Turn_64-4.png",
+    "rbt/images/tiles/original/T_Path_64-2.png",
+    "rbt/images/tiles/original/T_Path_64-1.png",
+    "rbt/images/tiles/original/T_Path_64-4.png",
+    "rbt/images/tiles/original/T_Path_64-3.png",
+    "rbt/images/tiles/original/4_Way_64.png",
+    "rbt/images/tiles/original/Dead_End_64_north.png",
+    "rbt/images/tiles/original/Dead_End_64_south.png",
+    "rbt/images/tiles/original/Dead_End_64_east.png",
+    "rbt/images/tiles/original/Dead_End_64_west.png"
 ]
 
 TILE_EXITS = [
@@ -107,7 +114,11 @@ TILE_EXITS = [
     ["south", "west", "east"],
     ["east", "north", "south"],
     ["east", "north", "south", "west"],
-    []
+    [],
+    ["north"],
+    ["south"],
+    ["east"],
+    ["west"]
 ]
 
 TILE_ENTITIES = {
