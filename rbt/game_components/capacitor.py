@@ -6,7 +6,7 @@ class Capacitor(map_entities.Map_Entities):
     
     # Requires a position, a capacitor value, and unique capacitor ID     
     def __init__(self, pos, id, max):
-        super(Capacitor, self).set_pos(pos, 'capacitor')
+        super(Capacitor, self).set_pos(pos, 'Capacitor')
         self.surface = pygame.Surface((30,30))
         self.surface.fill((36,94,255))
         self.id = id
@@ -27,6 +27,7 @@ class Capacitor(map_entities.Map_Entities):
         return {
             'pos': self.pos,
             'capacitance': self.value,
+            'type': self.type
         }
 
     def update(self):

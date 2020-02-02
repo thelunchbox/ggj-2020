@@ -5,7 +5,7 @@ class Spawn(map_entities.Map_Entities):
     
     # Requires a position, unique spawn ID  
     def __init__(self, pos, id, value, player):
-        super(Spawn, self).set_pos(pos, 'spawn')
+        super(Spawn, self).set_pos(pos, 'Spawn')
         self.surface = pygame.Surface((30,30))
         self.surface.fill((168,30,20))
         self.id = id
@@ -19,7 +19,8 @@ class Spawn(map_entities.Map_Entities):
     def getState(self):
         return {
             'pos': self.pos,
-            'player': self.player
+            'player': self.player,
+            'type': self.type
         }
 
     def update(self):

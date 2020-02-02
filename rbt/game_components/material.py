@@ -5,7 +5,7 @@ class Material(map_entities.Map_Entities):
     
     # Requires a position, unique material ID and a value (number of material units)    
     def __init__(self, pos, id, value):
-        super(Material, self).set_pos(pos, 'material')
+        super(Material, self).set_pos(pos, 'Material')
         self.surface = pygame.Surface((30,30))
         self.surface.fill((255,255,51))
         self.id = id
@@ -20,7 +20,8 @@ class Material(map_entities.Map_Entities):
     def getState(self):
         return {
             'pos': self.pos,
-            'value': self.value
+            'value': self.value,
+            'type': self.type
         }
         
     def update(self):
