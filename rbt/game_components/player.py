@@ -48,7 +48,8 @@ class Player(pygame.sprite.Sprite):
                 bot.dead = True
 
         for bot in self.bots:
-            self.bots.remove(bot)
+            if (bot.dead):
+                self.bots.remove(bot)
 
     def getState(self):
         botStates = {}
@@ -73,14 +74,18 @@ class Player(pygame.sprite.Sprite):
 
     def setPlayerFromState(self, playerState):
         # create any new player that doesn't exist
-        for botID in playerState['bots'].keys():
+        allBots = playerState['bots']
+        for botID in allBots.keys():
             if (not self.get_bot(botID)):
-                bot = Bot(botID, playerState['bots'][botID]['slots'], self.id)
+                bot = Bot(botID, allBots[botID]['slots'], self.id)
                 bot.set_color((0,255,0))
                 self.bots.append(bot)
 
         for bot in self.bots:
-            bot.setBotFromState(playerState['bots'][bot.botID])
+            if (not allBots.get(bot.botID, False)):
+                self.bots.remove(bot)
+            else:
+                bot.setBotFromState(allBots[bot.botID])
 
         self.pos = playerState['pos']
         self.resource = playerState['resource']
