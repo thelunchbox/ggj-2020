@@ -2,10 +2,11 @@ import pygame
 from rbt.utils.utils import getClassName
 
 class Tile():
-    def __init__(self, index, entities):
+    def __init__(self, index, pos, entities):
         self.surface = pygame.image.load(TILE_PATHS[index])
         self.exits = TILE_EXITS[index]
         self.gameEntities = entities
+        self.pos = pos
 
     def addEntity(self, entity):
         self.gameEntities.append(entity)

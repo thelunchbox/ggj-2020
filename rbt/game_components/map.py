@@ -18,16 +18,26 @@ class Map():
     def __init__(self):
         self.surface = pygame.Surface(((TILE_WIDTH * MAP_WIDTH)+MAP_BORDER , (TILE_HEIGHT * MAP_HEIGHT)+MAP_BORDER))
         self.surface.fill((220,220,220))
-        self.setBoard()
+        self.generateMap(TILES)
+        self.tiles = []
 
-    def setBoard(self):
-        self.board = []
+    def generateMap(self, tiles):
         for x in range(MAP_WIDTH):
-            self.board.append([])
+            self.tiles.append([])
             for y in range(MAP_HEIGHT):
-                self.board[x].append(TILE_SURFACES[TILES[y][x]])
-                self.surface.blit(self.board[x][y],((TILE_WIDTH*x)+(MAP_BORDER/2),(TILE_HEIGHT*y)+(MAP_BORDER/2),TILE_WIDTH,TILE_HEIGHT))
+                #self.tiles[x].append(TILE_SURFACES[tiles[y][x]])
+                self.tiles[x].append(Tile([tiles[y][x]], (x,y), [])
+                #self.surface.blit(self.board[x][y],((TILE_WIDTH*x)+(MAP_BORDER/2),(TILE_HEIGHT*y)+(MAP_BORDER/2),TILE_WIDTH,TILE_HEIGHT))
 
     def render(self, screen):
         screen.blit(self.surface, (MAP_MARGIN, 0))
+
+    def update(self):
+        pass
+
+    def setFromState(self, state):
+        pass
+
+    def getState(self):
+        pass
 
