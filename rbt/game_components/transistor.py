@@ -4,15 +4,15 @@ import pygame
 class Transistor(map_entities.Map_Entities):
     
     # Requires a position, and unique transistor ID       
-    def __init__(self, pos, ID, max):
+    def __init__(self, pos, id, max):
         super(Transistor, self).set_pos(pos, 'transistor')
         self.surface = pygame.Surface((30,30))
         self.surface.fill((163,255,15))
-        self.ID = ID
+        self.id = id
         # This is the same as the transistor's value
         self.max = max
         self.tearDown = False
-        print('New transistor created with ID [' + self.ID + ' at:')
+        print('New transistor created with ID [' + self.id + ' at:')
         print(self.pos[0:2])
         
     def render(self, screen):
@@ -26,5 +26,5 @@ class Transistor(map_entities.Map_Entities):
 
     def update(self):
         if (self.tearDown):
-            print("Now destroying transistor " + self.ID)
+            print("Now destroying transistor " + self.id)
         

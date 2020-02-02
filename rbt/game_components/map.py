@@ -6,6 +6,7 @@ from rbt.utils.constants import MAP_HEIGHT
 #from rbt.utils.constants import TILE_WIDTH
 #from rbt.utils.constants import TILE_HEIGHT
 from rbt.utils.constants import MAP_BORDER, MAP_MARGIN
+from rbt.game_components.tile import Tile
 board = []
 
 
@@ -17,12 +18,6 @@ for file in TILE_PATHS:
 s = TILE_SURFACES[0].get_rect()
 TILE_WIDTH  = s.width
 TILE_HEIGHT = s.height
-
-class Tile():
-    def __init__(self, config, entities):
-        self.surface = pygame.image.load(config.tileImage)
-        self.openPaths = config.openPaths
-        self.gameEntities = entities
 
 class Map():
     def __init__(self):

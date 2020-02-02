@@ -4,14 +4,14 @@ import pygame
 class Material(map_entities.Map_Entities):
     
     # Requires a position, unique material ID and a value (number of material units)    
-    def __init__(self, pos, ID, value):
+    def __init__(self, pos, id, value):
         super(Material, self).set_pos(pos, 'material')
         self.surface = pygame.Surface((30,30))
         self.surface.fill((255,255,51))
-        self.ID = ID
+        self.id = id
         self.value = value
         self.tearDown = False
-        print('New material created with ID [' + self.ID + ' at:')
+        print('New material created with ID [' + self.id + ' at:')
         print(self.pos[0:2])
         
     def render(self, screen):
@@ -25,5 +25,5 @@ class Material(map_entities.Map_Entities):
         
     def update(self):
         if (self.tearDown):
-            print("Now destroying material " + self.ID)
+            print("Now destroying material " + self.id)
         
