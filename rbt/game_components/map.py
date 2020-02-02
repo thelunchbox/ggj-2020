@@ -5,7 +5,7 @@ from rbt.utils.constants import MAP_WIDTH
 from rbt.utils.constants import MAP_HEIGHT
 from rbt.utils.constants import TILE_WIDTH
 from rbt.utils.constants import TILE_HEIGHT
-from rbt.utils.constants import MAP_BORDER, MAP_MARGIN
+from rbt.utils.constants import MAP_BORDER
 from rbt.utils.utils import screenCoords
 from rbt.game_components.tile import Tile
 board = []
