@@ -27,7 +27,7 @@ class Map():
             self.tiles.append([])
             for y in range(MAP_HEIGHT):
                 self.tiles[x].append(Tile([tiles[y][x]], (x,y), {}))
-                self.surface.blit(self.tiles[x][y].getBackground(), screenCoords((x,y))))
+                self.surface.blit(self.tiles[x][y].getBackground(), screenCoords((x,y)))
 
     def render(self, screen):
         screen.blit(self.surface, (0, 0))
