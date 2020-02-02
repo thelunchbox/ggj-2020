@@ -4,6 +4,7 @@ from rbt.client.clientChannel import ClientChannel
 from rbt.game_components.game_state import GameState
 from rbt.game_components import player
 from rbt.utils.constants import MAX_PLAYERS, SCREEN_RESOLUTION
+from rbt.utils.utils import mapCoords
 from rbt.game_components import map
 
 class Client():
@@ -39,8 +40,9 @@ class Client():
                 ## Send inputs to the server
                 ############################
                 if pygame.mouse.get_pressed()[0]:
-                    coords = pygame.mouse.get_pos()
-                    self.serverConnection.send("updatePlayer", { "pos": coords })
+                    coords = mapCoords(pygame.mouse.get_pos())
+                    if (coords[0] < 16 and coords[1] < 16 and coords[0] >= 0 and coords[1] >= 0)
+                        self.serverConnection.send("deployBot", { "pos": coords })
                 keystate = pygame.key.get_pressed()
 
                 if keystate[pygame.K_1]:
