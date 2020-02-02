@@ -20,7 +20,8 @@ class GameState():
 
     def update(self):
         #TODO: detect collisions n stuff
-        pass
+        for p in self.players.values():
+            p.update()
 
     def setGameFromState(self, state):
         # create any new player that doesn't exist

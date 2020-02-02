@@ -43,16 +43,12 @@ class Client():
                 keystate = pygame.key.get_pressed()
 
                 if keystate[pygame.K_1]:
-                    print('addBot message')
                     self.serverConnection.send("addBot", { 'ports': 1 })
                 elif keystate[pygame.K_2]:
-                    print('addBot message')
                     self.serverConnection.send("addBot", { 'ports': 2 })
                 elif keystate[pygame.K_3]:
-                    print('addBot message')
                     self.serverConnection.send("addBot", { 'ports': 3 })
                 elif keystate[pygame.K_4]:
-                    print('addBot message')
                     self.serverConnection.send("addBot", { 'ports': 4 })
 
             ## Render the screen

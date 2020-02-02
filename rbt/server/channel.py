@@ -1,6 +1,6 @@
 import json
 from PodSixNet.Channel import Channel
-import uuid
+from rbt.utils.utils import getId
 
 class ClientChannel(Channel):
     def __init__(self, *args, **kwargs):
@@ -17,6 +17,5 @@ class ClientChannel(Channel):
         self.player.pos = data['data']["pos"] # simply update the coordinates of the player for now
 
     def Network_addBot(self, data):
-        print('addBot!', self.player.id, data['data'])
         # create a new bot with a number of ports
-        self.player.create_bot(uuid.uuid1(), data['data']['ports'])
+        self.player.create_bot(getId(), data['data']['ports'])
