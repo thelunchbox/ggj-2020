@@ -2,9 +2,9 @@ import pygame
 from rbt.utils.utils import getClassName
 
 class Tile():
-    def __init__(self, config, entities):
-        self.surface = pygame.image.load(config.tileImage)
-        self.openPaths = config.openPaths
+    def __init__(self, index, entities):
+        self.surface = pygame.image.load(TILE_PATHS[index])
+        self.exits = TILE_EXITS[index]
         self.gameEntities = entities
 
     def addEntity(self, entity):
