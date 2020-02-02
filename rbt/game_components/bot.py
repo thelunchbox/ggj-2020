@@ -20,7 +20,7 @@ class Bot():
         self.material = 0 # raw material
         self.owner = owner
         self.pos = (0,0)
-        self.dead = False
+        self.expired = False
 
     def set_pos(self, pos):
         self.pos = pos
@@ -65,9 +65,7 @@ class Bot():
         self.move()
         self.ttl -= SIGNAL_DECAY
         if (self.ttl <= 0):
-            self.dead = True
-        if (self.pos[1] > 1020 or self.pos[1] < 0): #TODO: fix me
-            self.dead = True
+            self.expired = True
 
     def render(self, screen):
         if (self.image):

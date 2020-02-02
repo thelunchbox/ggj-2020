@@ -6,8 +6,10 @@ from rbt.utils.constants import MAP_HEIGHT
 from rbt.utils.constants import TILE_WIDTH
 from rbt.utils.constants import TILE_HEIGHT
 from rbt.utils.constants import MAP_BORDER
-from rbt.utils.utils import screenCoords, mapCoords
+from rbt.utils.constants import SPAWN_POINTS
+from rbt.utils.utils import screenCoords, mapCoords, getId
 from rbt.game_components.tile import Tile
+from rbt.game_components.spawn import Spawn
 board = []
 
 
@@ -28,6 +30,15 @@ class Map():
             for y in range(MAP_HEIGHT):
                 self.tiles[x].append(Tile(tiles[y][x], (x,y), {}))
                 self.surface.blit(self.tiles[x][y].getBackground(), screenCoords((x,y)))
+        self.initializeSpawns()
+
+    def initializeSpawns(self):
+        for sp in SPAWN_POINTS:
+            t = sp[0]
+            owner = sp[1]
+            tile = self.tiles[t[0]][t[1]]
+            spawn = Spawn(t, getId(), owner)
+            tile.addEntity(spawn)
 
     def render(self, screen):
         screen.blit(self.surface, (0, 0))

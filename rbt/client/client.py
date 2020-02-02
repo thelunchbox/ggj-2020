@@ -13,7 +13,7 @@ class Client():
         self.game = GameState()
         self.serverConnection = ClientChannel(host, port, self)
         pygame.init()
-        pygame.display.set_caption("REPAIR GAME")
+        pygame.display.set_caption('GREMLIN DONGLES')
         self.screen = pygame.display.set_mode(SCREEN_RESOLUTION)
 
     def waitForPlayers(self):

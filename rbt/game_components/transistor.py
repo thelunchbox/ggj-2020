@@ -7,7 +7,7 @@ class Transistor(map_entities.Map_Entities):
     # Requires a position, and unique transistor ID       
     def __init__(self, pos, id, max):
         super(Transistor, self).set_pos(pos, 'Transistor')
-        self.surface = pygame.Surface((30,30))
+        self.surface = pygame.Surface((64,64))
         self.surface.fill((163,255,15))
         self.id = id
         # This is the same as the transistor's value

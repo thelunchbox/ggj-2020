@@ -28,6 +28,17 @@ RESISTOR_DAMAGE = 50
 MAP_WIDTH = 16     # in tiles
 MAP_HEIGHT = 16
 
+SPAWN_POINTS = [
+    [(0,0), 1],
+    [(1,0), 1],
+    [(2,0), 1],
+    [(3,0), 1],
+    [(0,15), 2],
+    [(1,15), 2],
+    [(2,15), 2],
+    [(3,15), 2]
+]
+
 TILE_WIDTH  = 64
 TILE_HEIGHT = 64
 

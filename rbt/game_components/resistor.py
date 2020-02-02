@@ -10,7 +10,7 @@ class Resistor(map_entities.Map_Entities):
     # Requires a position, unique Resistor ID and a value (number of Resistor units)    
     def __init__(self, pos, id, value):
         super(Resistor, self).set_pos(pos, 'Resistor')
-        self.surface = pygame.Surface((30,30))
+        self.surface = pygame.Surface((64,64))
         self.surface.fill((168,30,20))
         self.id = id
         # This value is compared to the Gremlin's TTL (avg 32000?)

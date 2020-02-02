@@ -2,6 +2,7 @@ import pygame
 from rbt.utils.utils import getClassName
 from rbt.utils.constants import TILE_PATHS, TILE_EXITS, COLOR
 from rbt.game_components.bot import Bot
+from rbt.game_components.spawn import Spawn
 from rbt.utils.utils import screenCoords
 
 class Tile():
@@ -38,6 +39,7 @@ class Tile():
             pygame.draw.rect(screen, COLOR['cyan'], (xy[0], xy[1], 64, 64), 2)
 
         for entity in self.gameEntities.values():
+            print('rendering entity', getClassName(entity), entity.id)
             entity.render(screen)
 
     def getBackground(self):
@@ -45,7 +47,6 @@ class Tile():
 
     def setFromState(self, state):
         entityStates = state['entities']
-
         # create new entities
         for id in entityStates.keys():
             if (not self.gameEntities.get(id, None)):
@@ -55,13 +56,20 @@ class Tile():
                     bot = Bot(id, entityState['slots'], entityState['owner'])
                     bot.set_color()
                     self.addEntity(bot)
+                if (entityType == 'Spawn'):
+                    spawn = Spawn(self.pos, id, entityState['player'])
+                    self.addEntity(spawn)
 
+        destroyedEntityIds = []
         # update/delete entities
         for id in self.gameEntities.keys():
             if (not entityStates.get(id, False)):
-                self.removeEntity(self.gameEntities[id])
+                destroyedEntityIds.append(id)
             else:
                 self.gameEntities[id].setFromState(entityStates[id])
+
+        for key in destroyedEntityIds:
+                self.removeEntity(self.gameEntities[key])
 
     def update(self):
         for entity in self.gameEntities.values():
