@@ -1,4 +1,5 @@
-import pygame, objgraph
+import pygame
+#import objgraph
 import time
 from rbt.client.clientChannel import ClientChannel
 from rbt.game_components.hud import Button
@@ -68,10 +69,10 @@ class Client():
                 elif keystate[pygame.K_4]:
                     self.serverConnection.send("addBot", { 'ports': 4 })
 
-                elif keystate[pygame.K_9]:
-                    print("==============")
-                    objgraph.show_most_common_types(50)
-                    print("")
+                #elif keystate[pygame.K_9]:
+                #    print("==============")
+                #    objgraph.show_most_common_types(50)
+                #    print("")
 
 
             ## Render the screen
