@@ -10,7 +10,7 @@ class ClientChannel(ConnectionListener):
         print("client started")
 
     def Network_updateGameState(self, data):
-        self.client.game.setGameFromState(data["data"]["gameState"])
+        self.client.game.setFromState(data["data"]["gameState"])
         # print("Got game state from server", data)
 
     def Network_setID(self, data):

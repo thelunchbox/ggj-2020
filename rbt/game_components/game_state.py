@@ -23,7 +23,7 @@ class GameState():
         for p in self.players.values():
             p.update()
 
-    def setGameFromState(self, state):
+    def setFromState(self, state):
         # create any new player that doesn't exist
         for pState in state['players'].keys():
             if (not self.players.get(pState, False)):
@@ -31,7 +31,7 @@ class GameState():
 
         # update all the plrs
         for p in self.players.keys():
-            self.players[p].setPlayerFromState(state["players"][p])
+            self.players[p].setFromState(state["players"][p])
 
     def render(self, screen):
         for p in self.players.values():
