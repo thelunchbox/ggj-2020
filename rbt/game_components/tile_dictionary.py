@@ -16,3 +16,12 @@ class Tile_Dictionary():
             10: "clover", # connects all
             11: "blank" #connects none
     }
+        
+        self.entityTiles = {
+            0: "none",
+            1: "capacitor",
+            2: "resistor",
+            3: "transistor",
+            4: "material",
+            5: "tool"
+        }
