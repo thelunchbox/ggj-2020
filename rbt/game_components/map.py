@@ -1,4 +1,4 @@
-import pygame, os, random, copy
+import pygame
 from rbt.utils.constants import TILES
 from rbt.utils.constants import TILE_PATHS
 from rbt.utils.constants import MAP_WIDTH
@@ -37,7 +37,5 @@ class Map():
                 self.surface.blit(self.board[x][y],(TILE_WIDTH*x,TILE_HEIGHT*y,TILE_WIDTH,TILE_HEIGHT))
 
     def render(self, screen):
-        for x in range(MAP_WIDTH):
-            for y in range(MAP_HEIGHT):
-                screen.blit(self.surface, (0,0))
+        screen.blit(self.surface, (0,0))
 
