@@ -50,7 +50,7 @@ TILES = [
     [ 11, 11, 0, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 0  ]
 ]
 
-TILE_MAP = [
+TILE_MAP = {
     0: "vertical",
     1: "horizontal",
     2: "southwest", # connects south and west
@@ -63,7 +63,7 @@ TILE_MAP = [
     9: "trieast",
     10: "clover", # connects all
     11: "blank" #connects none
-]
+}
 
 TILE_PATHS = [
     "rbt/images/tiles/Vertical_64.png",

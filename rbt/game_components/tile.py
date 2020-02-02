@@ -1,6 +1,6 @@
 import pygame
 from rbt.utils.utils import getClassName
-
+from rbt.utils.constants import TILE_PATHS, TILE_EXITS
 from rbt.game_components.bot import Bot
 
 class Tile():
