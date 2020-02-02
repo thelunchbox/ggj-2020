@@ -4,7 +4,8 @@ from rbt.game_components.bot import Bot
 
 # This class represents the player
 from rbt.game_components.test_entities import Circle
-from rbt.utils.constants import PLAYER_COLORS, STARTING_RESOURCES
+from rbt.game_components.tools import Tool
+from rbt.utils.constants import PLAYER_COLORS, STARTING_RESOURCES, TOOL_COST
 
 
 class Player(pygame.sprite.Sprite):
@@ -15,6 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.connection = 0
         self.address = 0
         self.resource = STARTING_RESOURCES
+        self.tools = []
         self.bots = []
         self.inputs = {}
 
@@ -45,10 +47,20 @@ class Player(pygame.sprite.Sprite):
         pass
 
     def getState(self):
+        botStates = {}
+        toolStates = {}
+
+        for bot in self.bots:
+            botStates[bot.id] = bot.getState()
+        for tool in self.tools:
+            toolStates[tool.id] = tool.getState()
+            
         return {
             "id": self.id,
             "pos": self.pos,
             "resource": self.resource,
+            "bots": botStates,
+            "tools": toolStates
         }
 
     def captureInput(self, inputs):
@@ -60,3 +72,13 @@ class Player(pygame.sprite.Sprite):
     def setFromState(self, playerState):
         self.pos = playerState['pos']
         self.resource = playerState['resource']
+
+    def make_tool(self, toolID, toolType):
+        if self.resource >= TOOL_COST:
+            tool = Tool(toolID, toolType, self.id)
+            self.inventory.append(tool)
+            self.resource-=TOOL_COST
+            return tool
+        else:
+            print(self.id, 'player out of resources!')
+

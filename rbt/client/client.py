@@ -13,7 +13,7 @@ class Client():
         self.game = GameState()
         self.serverConnection = ClientChannel(host, port, self)
         pygame.init()
-        pygame.display.set_caption("REPAIR GAME")
+        pygame.display.set_caption('GREMLIN DONGLES')
         self.screen = pygame.display.set_mode(SCREEN_RESOLUTION)
 
     def waitForPlayers(self):
@@ -41,7 +41,12 @@ class Client():
                 if pygame.mouse.get_pressed()[0]:
                     coords = mapCoords(pygame.mouse.get_pos())
                     if (coords[0] < 16 and coords[1] < 16 and coords[0] >= 0 and coords[1] >= 0):
-                        self.serverConnection.send("deployBot", { "pos": coords })
+                        # this is a click on the MAP
+                        if (self.game.map.isSpawn(coords, self.playerID)):
+                            self.serverConnection.send("deployBot", { "pos": coords })
+                    else:
+                        pass # here we process clicks on the UI elements
+                    
                 keystate = pygame.key.get_pressed()
 
                 if keystate[pygame.K_1]:
@@ -52,6 +57,15 @@ class Client():
                     self.serverConnection.send("addBot", { 'ports': 3 })
                 elif keystate[pygame.K_4]:
                     self.serverConnection.send("addBot", { 'ports': 4 })
+                elif keystate[pygame.K_5]:
+                    self.serverConnection.send("makeTool", {'toolType': 'attack'})
+                elif keystate[pygame.K_6]:
+                    self.serverConnection.send("makeTool", {'toolType': 'gather'})
+                elif keystate[pygame.K_7]:
+                    self.serverConnection.send("makeTool", {'toolType': 'build'})
+                elif keystate[pygame.K_8]:
+                    self.serverConnection.send("makeTool", {'toolType': 'signal'})
+
 
             ## Render the screen
             ####################

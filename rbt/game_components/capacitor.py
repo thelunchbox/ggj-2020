@@ -8,7 +8,7 @@ class Capacitor(map_entities.Map_Entities):
     # Requires a position, a capacitor value, and unique capacitor ID     
     def __init__(self, pos, id, max):
         super(Capacitor, self).set_pos(pos, 'Capacitor')
-        self.surface = pygame.Surface((30,30))
+        self.surface = pygame.Surface((32,32))
         self.surface.fill((36,94,255))
         self.id = id
         # The current amount of charge available in the capacitor

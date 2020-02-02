@@ -1,7 +1,8 @@
-import pygame
+import pygame, random
 from rbt.utils.utils import getClassName
 from rbt.utils.constants import TILE_PATHS, TILE_EXITS, COLOR
 from rbt.game_components.bot import Bot
+from rbt.game_components.spawn import Spawn
 from rbt.utils.utils import screenCoords
 
 class Tile():
@@ -11,6 +12,7 @@ class Tile():
         self.gameEntities = entities # this is a dictionary
         self.pos = pos
         self.map = map
+        self.removeList = []
 
     def addEntity(self, entity):
         self.gameEntities[entity.id] = entity
@@ -34,19 +36,24 @@ class Tile():
                         b.interact(a)
     
     def render(self, screen, hover):
+        for entity in self.gameEntities.values():
+            entity.render(screen)
         if hover:
             xy = screenCoords(self.pos)
             pygame.draw.rect(screen, COLOR['cyan'], (xy[0], xy[1], 64, 64), 2)
 
-        for entity in self.gameEntities.values():
-            entity.render(screen)
-
     def getBackground(self):
         return self.surface
 
+    # look for entities
+    def contains(self, entityType):
+        for x in self.gameEntities.values():
+            if getClassName(x) == entityType:
+                return x
+        return None
+
     def setFromState(self, state):
         entityStates = state['entities']
-
         # create new entities
         for id in entityStates.keys():
             if (not self.gameEntities.get(id, None)):
@@ -56,15 +63,23 @@ class Tile():
                     bot = Bot(id, entityState['slots'], entityState['owner'])
                     bot.set_color()
                     self.addEntity(bot)
+                if (entityType == 'Spawn'):
+                    spawn = Spawn(self.pos, id, entityState['player'])
+                    self.addEntity(spawn)
 
+        destroyedEntityIds = []
         # update/delete entities
         for id in self.gameEntities.keys():
             if (not entityStates.get(id, False)):
-                self.removeEntity(self.gameEntities[id])
+                destroyedEntityIds.append(id)
             else:
                 self.gameEntities[id].setFromState(entityStates[id])
 
+        for key in destroyedEntityIds:
+                self.removeEntity(self.gameEntities[key])
+
     def update(self):
+        self.removeList = []
         for entity in self.gameEntities.values():
             entity.clean()
 
@@ -73,7 +88,10 @@ class Tile():
 
         for entity in self.gameEntities.values():
             if (entity.expired):
-                self.removeEntity(entity)
+                self.removeList.append(entity.id)
+
+        for key in set(self.removeList):
+                self.removeEntity(self.gameEntities[key])
 
     def getState(self):
         entityStates = {}
@@ -84,10 +102,11 @@ class Tile():
         }
 
     def getDirection(self, targetPos):
-        return random.choice(self.exits)
+        if self.exits:
+            return random.choice(self.exits)
+        return 'None'
 
-    def moveEntity(self, id, direction):
-        print("I am a lobster")
+    def moveEntity(self, entity, direction):
         targetTile = None
         if(direction == "north"):
             targetTile =self.map.getTile((self.pos[0], self.pos[1]-1))
@@ -98,6 +117,6 @@ class Tile():
         else:
             targetTile =self.map.getTile((self.pos[0]-1, self.pos[1]))
         if targetTile:
-            targetTile.addEntitiy(self.gameEntities[id])
-            self.removeEntity(self.gameEntities[id])
+            targetTile.addEntity(entity)
+            self.removeList.append(entity.id)
 

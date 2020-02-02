@@ -15,14 +15,14 @@ class Bot():
         self.image = None
         self.slots = slots
         self.speed = 3
+        self.tools = [] # tools i've picked up
         self.ttl = STARTING_TTL
-        self.inventory = [] # tools i've picked up
         self.material = 0 # raw material
         self.owner = owner
         self.pos = (0,0)
         self.targetPos = (0,0)
-        self.dead = False
-        self.clean = True
+        self.expired = False
+        self.dirty = True
 
     def set_pos(self, pos):
         self.pos = pos
@@ -32,16 +32,16 @@ class Bot():
         self.image = pygame.image.load(os.path.join('rbt', 'images', sprite))
 
     def getState(self):
-        inventoryState = {}
-        for t in self.inventory:
-            inventoryState[t.id] = t.getState()
+        toolState = {}
+        for tool in self.tools:
+            toolState[tool.toolID] = tool.getState()
 
         return {
             'id': self.id,
             'type': 'Bot',
             'slots': self.slots,
             'ttl': self.ttl,
-            'inventory': inventoryState,
+            'tools': toolState,
             'material': self.material,
             'pos': self.pos,
             'owner': self.owner
@@ -52,9 +52,8 @@ class Bot():
         self.ttl = botState['ttl']
         self.material = botState['material']
         self.pos = botState['pos']
+        self.tools = botState['tools']
         self.owner = botState['owner']
-        
-        #TODO: set inventory from state
 
     def update(self, tile):
         if self.dirty == False:
@@ -62,7 +61,7 @@ class Bot():
             tile.moveEntity(self, tile.getDirection(self.targetPos))
             self.ttl -= SIGNAL_DECAY
             if (self.ttl <= 0):
-                self.dead = True
+                self.expired = True
 
     def clean(self):
         self.dirty = False
