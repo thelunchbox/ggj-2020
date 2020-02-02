@@ -17,6 +17,7 @@ class Client():
         self.serverConnection = ClientChannel(host, port, self)
         pygame.init()
         pygame.display.set_caption('BLUETOOTH BYTES')
+        # self.screen = pygame.display.set_mode(SCREEN_RESOLUTION, pygame.FULLSCREEN)
         self.screen = pygame.display.set_mode(SCREEN_RESOLUTION)
         pygame.mixer.music.load('BTB_Overture.wav')
         pygame.mixer.music.play(-1)
@@ -61,9 +62,11 @@ class Client():
                             self.serverConnection.send("makeTool", {'type': 'signal'})
                 elif pygame.mouse.get_pressed()[2]:
                     coords = mapCoords(pygame.mouse.get_pos())
-                    screenCoords = pygame.mouse.get_pos()
-                    print(coords)
-                    
+                    print("MAP COORDS:", coords)
+                    tile = self.game.map.getTile(coords)
+                    print("TILE Data:", tile.exits)
+
+
                 keystate = pygame.key.get_pressed()
 
                 if keystate[pygame.K_1]:

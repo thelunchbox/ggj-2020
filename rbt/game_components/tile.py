@@ -103,9 +103,7 @@ class Tile():
 
     def getDirection(self, targetPos):
         if self.exits:
-            exitDirection = random.choice(self.exits)
-            print (exitDirection)
-            return exitDirection
+            return random.choice(self.exits)
         return 'None'
 
     def moveEntity(self, entity, direction):
@@ -113,7 +111,7 @@ class Tile():
         if(direction == "north"):
             targetTile =self.map.getTile((self.pos[0], self.pos[1]-1))
         elif(direction == "south"):
-            targetTile =self.map.getTile((self.pos[0], self.pos[1]+2))
+            targetTile =self.map.getTile((self.pos[0], self.pos[1]+1))
         elif(direction == "east"):
             targetTile =self.map.getTile((self.pos[0]+1, self.pos[1]))
         else:
