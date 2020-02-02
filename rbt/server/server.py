@@ -12,7 +12,8 @@ def run(host, port):
     while True:
         gameServer.Pump()
         time.sleep(0.001)
-        now = ticks(datetime.now())
-        if (now - lastUpdate >= TICK_RATE):
-            gameServer.Process()
-            lastUpdate = now
+        gameServer.Process()
+        # now = ticks(datetime.now())
+        # if (now - lastUpdate >= TICK_RATE):
+        #     gameServer.Process()
+        #     lastUpdate = now
