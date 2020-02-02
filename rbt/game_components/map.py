@@ -35,7 +35,7 @@ class Map():
         for x in range(MAP_WIDTH):
             self.board.append([])
             for y in range(MAP_HEIGHT):
-                self.board[x].append(TILE_SURFACES[TILES[x][y]])
+                self.board[x].append(TILE_SURFACES[TILES[y][x]])
                 self.surface.blit(self.board[x][y],((TILE_WIDTH*x)+(MAP_BORDER/2),(TILE_HEIGHT*y)+(MAP_BORDER/2),TILE_WIDTH,TILE_HEIGHT))
 
     def render(self, screen):
