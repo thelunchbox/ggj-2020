@@ -3,16 +3,18 @@ import time
 from rbt.client.clientChannel import ClientChannel
 from rbt.game_components.game_state import GameState
 from rbt.game_components import player
-from rbt.utils.constants import MAX_PLAYERS
+from rbt.utils.constants import MAX_PLAYERS, SCREEN_RESOLUTION
+from rbt.game_components import map
 
 class Client():
     def __init__(self, host, port):
         self.playerID = None
         self.game = GameState()
+        self.map = map.Map()
         self.serverConnection = ClientChannel(host, port, self)
         pygame.init()
         pygame.display.set_caption("REPAIR GAME")
-        self.screen = pygame.display.set_mode((1500,1020))
+        self.screen = pygame.display.set_mode(SCREEN_RESOLUTION)
 
     def waitForPlayers(self):
         print("Waiting for other players")
@@ -44,6 +46,7 @@ class Client():
             ## Render the screen
             ####################
             self.screen.fill((0,0,0))
+            self.map.render(self.screen)
             self.game.render(self.screen)
             pygame.display.flip()
 
