@@ -2,7 +2,8 @@ import pygame
 import time
 from rbt.client.clientChannel import ClientChannel
 from rbt.game_components.game_state import GameState
-from rbt.game_components import player
+from rbt.game_components import player, test_entities
+from rbt.game_components.player import Player
 from rbt.utils.constants import MAX_PLAYERS
 
 class Client():
@@ -39,7 +40,16 @@ class Client():
                 if pygame.mouse.get_pressed()[0]:
                     coords = pygame.mouse.get_pos()
                     self.serverConnection.send("updatePlayer", { "pos": coords })
+                keystate = pygame.key.get_pressed()
 
+                if keystate[pygame.K_1]:
+                    self.serverConnection.send("addBot", { 'ports': 1 })
+                elif keystate[pygame.K_2]:
+                    self.serverConnection.send("addBot", { 'ports': 2 })
+                elif keystate[pygame.K_3]:
+                    self.serverConnection.send("addBot", { 'ports': 3 })
+                elif keystate[pygame.K_4]:
+                    self.serverConnection.send("addBot", { 'ports': 4 })
 
             ## Render the screen
             ####################

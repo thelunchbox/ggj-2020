@@ -17,3 +17,6 @@ PLAYER_COLORS = {
     1: COLOR['orange'],
     2: COLOR['cyan']
 }
+
+STARTING_RESOURCES = 30
+SIGNAL_DECAY = 50
