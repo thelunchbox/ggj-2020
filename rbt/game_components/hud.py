@@ -7,6 +7,7 @@ from rbt.utils.constants import *
 class Hud:
     def __init__(self):
         self.buttons = []
+        self.generate_all_buttons()
 
     def generate_attack_tool_button(self):
         btn = Button((204, 0, 0), ATTACK_BUTTON_X, ATTACK_BUTTON_Y, TOOL_BUTTON_WIDTH, TOOL_BUTTON_HEIGHT, str("Attack"))
@@ -25,12 +26,14 @@ class Hud:
         btn = Button((0, 255, 255), 800, 500, 100, 30, str("Create " + slots) + " slot bot")
         self.buttons.append(btn)
 
-    def render(self, screen):
-        #self.generate_bot_button('four')
+    def generate_all_buttons(self):
         self.generate_attack_tool_button()
         self.generate_gather_tool_button()
         self.generate_build_tool_button()
         self.generate_signal_tool_button()
+
+    def render(self, screen):
+        #self.generate_bot_button('four')
         for button in self.buttons:
             button.draw(screen, (0,0,0))
 
