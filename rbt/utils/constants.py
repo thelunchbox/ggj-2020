@@ -78,6 +78,10 @@ TILE_MAP = {
     9: "trieast",
     10: "clover", # connects all
     11: "blank" #connects none
+    12: "northend" #connects none
+    13: "southend" #connects none
+    14: "eastend" #connects none
+    15: "westend" #connects none
 }
 
 TILE_PATHS = [
@@ -92,7 +96,10 @@ TILE_PATHS = [
     "rbt/images/tiles/original/T_Path_64-4.png",
     "rbt/images/tiles/original/T_Path_64-3.png",
     "rbt/images/tiles/original/4_Way_64.png",
-    "rbt/images/tiles/original/Blank_64.png"
+    "rbt/images/tiles/original/Dead_End_64_north.png",
+    "rbt/images/tiles/original/Dead_End_64_south.png",
+    "rbt/images/tiles/original/Dead_End_64_east.png",
+    "rbt/images/tiles/original/Dead_End_64_west.png"
 ]
 
 TILE_EXITS = [
@@ -107,5 +114,9 @@ TILE_EXITS = [
     ["south", "west", "east"],
     ["east", "north", "south"],
     ["east", "north", "south", "west"],
-    []
+    [],
+    ["north"],
+    ["south"],
+    ["east"],
+    ["west"]
 ]
