@@ -24,6 +24,7 @@ class Map():
         self.tiles = []
         mapFile = open(os.path.join('rbt', 'game_components', 'maps', 'player_map.json'))
         mapInfo = json.load(mapFile)
+        mapFile.close()
         self.generateMap(mapInfo['tiles'])
         self.initializeEntities(mapInfo['entities'])
 

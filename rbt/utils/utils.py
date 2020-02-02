@@ -2,7 +2,7 @@ import socket
 import uuid
 from datetime import datetime
 
-from rbt.utils.constants import TILE_WIDTH, TILE_HEIGHT, MAP_BORDER
+from rbt.utils.constants import TILE_WIDTH, TILE_HEIGHT, MAP_BORDER, TOOL_BUTTON_WIDTH, TOOL_BUTTON_HEIGHT
 
 HALF_MAP_BORDER = MAP_BORDER/2
 
@@ -28,6 +28,13 @@ def screenCoords(coords):
 
 def mapCoords(coords):
     return (int((coords[0] - HALF_MAP_BORDER) / TILE_WIDTH), int((coords[1] - HALF_MAP_BORDER) / TILE_HEIGHT))
+
+def isOver(buttonPos, pos):
+    #Pos is the mouse position or a tuple of (x,y) coordinates
+    if pos[0] > buttonPos[0] and pos[0] < buttonPos[0] + TOOL_BUTTON_WIDTH:
+        if pos[1] > buttonPos[1] and pos[1] < buttonPos[0] + TOOL_BUTTON_HEIGHT:
+            return True
+    return False
 
 def ticks(dt):
     return (dt - datetime(1, 1, 1)).total_seconds() * 10000000

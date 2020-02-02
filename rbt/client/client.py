@@ -1,10 +1,12 @@
 import pygame, objgraph
 import time
 from rbt.client.clientChannel import ClientChannel
+from rbt.game_components.hud import Button
 from rbt.game_components.game_state import GameState
 from rbt.game_components import player
-from rbt.utils.constants import MAX_PLAYERS, SCREEN_RESOLUTION
-from rbt.utils.utils import mapCoords
+from rbt.utils.constants import MAX_PLAYERS, SCREEN_RESOLUTION, ATTACK_BUTTON_X, ATTACK_BUTTON_Y, GATHER_BUTTON_X, \
+    BUILD_BUTTON_X, SIGNAL_BUTTON_X, SIGNAL_BUTTON_Y, BUILD_BUTTON_Y, GATHER_BUTTON_Y
+from rbt.utils.utils import mapCoords, isOver
 
 
 class Client():
@@ -40,12 +42,20 @@ class Client():
                 ############################
                 if pygame.mouse.get_pressed()[0]:
                     coords = mapCoords(pygame.mouse.get_pos())
+                    screenCoords = pygame.mouse.get_pos()
                     if (coords[0] < 16 and coords[1] < 16 and coords[0] >= 0 and coords[1] >= 0):
                         # this is a click on the MAP
                         if (self.game.map.isSpawn(coords, self.playerID)):
                             self.serverConnection.send("deployBot", { "pos": coords })
                     else:
-                        pass # here we process clicks on the UI elements
+                        if(isOver((ATTACK_BUTTON_X, ATTACK_BUTTON_Y ), screenCoords) ):
+                            self.serverConnection.send("makeTool", {'type': 'attack'})
+                        if(isOver((GATHER_BUTTON_X, GATHER_BUTTON_Y ), screenCoords) ):
+                            self.serverConnection.send("makeTool", {'type': 'gather'})
+                        if(isOver((BUILD_BUTTON_X, BUILD_BUTTON_Y ), screenCoords) ):
+                            self.serverConnection.send("makeTool", {'type': 'build'})
+                        if(isOver((SIGNAL_BUTTON_X, SIGNAL_BUTTON_Y ), screenCoords) ):
+                            self.serverConnection.send("makeTool", {'type': 'signal'})
                     
                 keystate = pygame.key.get_pressed()
 
@@ -57,14 +67,7 @@ class Client():
                     self.serverConnection.send("addBot", { 'ports': 3 })
                 elif keystate[pygame.K_4]:
                     self.serverConnection.send("addBot", { 'ports': 4 })
-                elif keystate[pygame.K_5]:
-                    self.serverConnection.send("makeTool", {'toolType': 'attack'})
-                elif keystate[pygame.K_6]:
-                    self.serverConnection.send("makeTool", {'toolType': 'gather'})
-                elif keystate[pygame.K_7]:
-                    self.serverConnection.send("makeTool", {'toolType': 'build'})
-                elif keystate[pygame.K_8]:
-                    self.serverConnection.send("makeTool", {'toolType': 'signal'})
+
                 elif keystate[pygame.K_9]:
                     print("==============")
                     objgraph.show_most_common_types(50)
