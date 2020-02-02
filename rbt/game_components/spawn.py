@@ -8,7 +8,8 @@ class Spawn(map_entities.Map_Entities):
     def __init__(self, pos, id, player):
         super(Spawn, self).set_pos(pos, 'Spawn')
         self.surface = pygame.Surface((32,32))
-        self.surface.fill((168,30,20))
+        color = (20,130,198) if player == 1 else (168,30,20)
+        self.surface.fill(color)
         self.id = id
         self.player = player
         self.expired = False
