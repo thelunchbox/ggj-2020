@@ -25,8 +25,7 @@ class Tile():
 
 class Map():
     def __init__(self):
-        #self.surface = pygame.Surface((300,300))
-        #self.surface.fill((255,100,100))
+        self.surface = pygame.Surface((TILE_WIDTH * MAP_WIDTH, TILE_HEIGHT * MAP_HEIGHT))
         self.setBoard()
 
     def setBoard(self):
@@ -35,9 +34,10 @@ class Map():
             self.board.append([])
             for y in range(MAP_HEIGHT):
                 self.board[x].append(TILE_SURFACES[TILES[x][y]])
+                self.surface.blit(self.board[x][y],(TILE_WIDTH*x,TILE_HEIGHT*y,TILE_WIDTH,TILE_HEIGHT))
 
     def render(self, screen):
         for x in range(MAP_WIDTH):
             for y in range(MAP_HEIGHT):
-                screen.blit(self.board[x][y],(TILE_WIDTH*x,TILE_HEIGHT*y,TILE_WIDTH,TILE_HEIGHT))
+                screen.blit(self.surface, (0,0))
 
