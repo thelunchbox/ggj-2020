@@ -1,8 +1,9 @@
 import pygame
 import random
 import operator
+import os
 
-from rbt.utils.constants import SIGNAL_DECAY
+from rbt.utils.constants import SIGNAL_DECAY, STARTING_TTL
 from rbt.utils.utils import screenCoords
 
 # This class represents the robots that the player controls
@@ -11,10 +12,10 @@ class Bot():
 
     def __init__(self, id, slots, owner):
         self.id = id
-        self.image = pygame.Surface((30,30))
+        self.image = None
         self.slots = slots
         self.speed = 3
-        self.ttl = 32000 #TODO: replace with config
+        self.ttl = STARTING_TTL
         self.inventory = [] # tools i've picked up
         self.material = 0 # raw material
         self.owner = owner
@@ -24,8 +25,9 @@ class Bot():
     def set_pos(self, pos):
         self.pos = pos
 
-    def set_color(self, color):
-        self.image.fill(color)
+    def set_color(self):
+        sprite = 'Bluetooth_64.png' if self.owner == 1 else 'Redtooth_64.png'
+        self.image = pygame.image.load(os.path.join('rbt', 'images', sprite))
 
     def getState(self):
         inventoryState = {}
@@ -48,6 +50,7 @@ class Bot():
         self.ttl = botState['ttl']
         self.material = botState['material']
         self.pos = botState['pos']
+        self.owner = botState['owner']
         
         #TODO: set inventory from state
 
@@ -67,7 +70,8 @@ class Bot():
             self.dead = True
 
     def render(self, screen):
-        screen.blit(self.image, screenCoords(self.pos))
+        if (self.image):
+            screen.blit(self.image, screenCoords(self.pos))
 
     def interact(self, entity):
         pass

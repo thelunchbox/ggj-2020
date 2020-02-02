@@ -32,7 +32,7 @@ class Tile():
                         b.interact(a)
     
     def render(self, screen):
-        for entity in self.gameEntities:
+        for entity in self.gameEntities.values():
             entity.render(screen)
 
     def getBackground(self):
@@ -48,7 +48,7 @@ class Tile():
                 entityType = entityState['type']
                 if (entityType == 'Bot'):
                     bot = Bot(id, entityState['slots'], entityState['owner'])
-                    bot.set_color((0,255,0)) # fix pls
+                    bot.set_color()
                     self.addEntity(bot)
 
         # update/delete entities

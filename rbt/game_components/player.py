@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
 
     # Create a bot and add it to the list of existing bots.
     def create_bot(self, botID, slots):
-        resourceCost = 2 + ( slots * 3 )
+        resourceCost = 2 + (slots * 3)
         if resourceCost <= self.resource:
             bot = Bot(botID, slots, self.id)
             self.bots.append(bot)
@@ -34,7 +34,7 @@ class Player(pygame.sprite.Sprite):
             # bot.set_pos((random.randrange(50, 1450), self.yStart)) # not yet...
             return bot
         else:
-            print(self.id, 'player out of resources!')
+            print(self.id, 'player out of resources!', resourceCost, '>', self.resource)
 
     def get_bot(self, botID):
         for bot in self.bots:
