@@ -22,7 +22,7 @@ class ClientChannel(Channel):
         self.player.create_bot(getId(), data['data']['ports'])
 
     def Network_makeTool(self, data):
-        self.player.make_tool(getId(), data['data']['tooltype'])
+        self.player.make_tool(getId(), data['data']['type'])
 
     def Network_deployBot(self, data):
         # get a bot from the player's inventory (or cheat in dev)
