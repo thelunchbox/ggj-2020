@@ -34,7 +34,8 @@ class Map():
         for x in range(MAP_WIDTH):
             self.board.append([])
             for y in range(MAP_HEIGHT):
-                self.board[x].append(TILE_SURFACES[TILES[x][y]])
+                self.board[x].append(TILE_SURFACES[random.choice(range(len(TILE_SURFACES)))])
+                #self.board[x].append(TILE_SURFACES[TILES[x][y]])
 
     def render(self, screen):
         for x in range(MAP_WIDTH):
