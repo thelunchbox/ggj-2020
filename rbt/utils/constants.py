@@ -134,7 +134,8 @@ TILE_EXITS = [
     ["north"],
     ["south"],
     ["east"],
-    ["west"]]
+    ["west"]
+]
 
 
 TILE_ENTITIES = {
@@ -146,4 +147,4 @@ TILE_ENTITIES = {
     5: "Tool",
     6: "Spawn.1",
     7: "Spawn.2"
-
+}
