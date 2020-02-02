@@ -1,7 +1,7 @@
 import socket
 import uuid
 
-from constants import TILE_WIDTH, TILE_HEIGHT, MAP_BORDER
+from rbt.utils.constants import TILE_WIDTH, TILE_HEIGHT, MAP_BORDER
 
 HALF_MAP_BORDER = MAP_BORDER/2
 
