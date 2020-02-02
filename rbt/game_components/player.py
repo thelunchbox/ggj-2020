@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
             bot = Bot(botID, slots, self.id)
             self.bots.append(bot)
             self.resource -= resourceCost
-            bot.set_pos((random.randrange(50, 1450), self.yStart))
+            # bot.set_pos((random.randrange(50, 1450), self.yStart)) # not yet...
             return bot
         else:
             print(self.id, 'player out of resources!')

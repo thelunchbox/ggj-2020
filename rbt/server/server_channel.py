@@ -25,6 +25,7 @@ class ServerChannel(Server):
             channel.Send(response)
             self.game.players[p.id] = p
             channel.player = p
+            channel.game = self.game
             self.connections[p.id] = channel
     
     def RemovePlayer(self, connection):
