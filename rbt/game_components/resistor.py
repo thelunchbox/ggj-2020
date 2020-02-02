@@ -1,6 +1,7 @@
 from rbt.game_components import map_entities
 import pygame
 from rbt.utils.constants import RESISTOR_DAMAGE
+from rbt.utils.utils import screenCoords
 
 class Resistor(map_entities.Map_Entities):
     def test(self):
@@ -21,7 +22,7 @@ class Resistor(map_entities.Map_Entities):
         self.destroying = False
         
     def render(self, screen):
-        screen.blit(self.surface, self.pos)
+        screen.blit(self.surface, screenCoords(self.pos))
 
     def getState(self):
         if (self.value <= 0):

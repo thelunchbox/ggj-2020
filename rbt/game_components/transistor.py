@@ -1,4 +1,5 @@
 from rbt.game_components import map_entities
+from rbt.utils.utils import screenCoords
 import pygame
 
 class Transistor(map_entities.Map_Entities):
@@ -16,7 +17,7 @@ class Transistor(map_entities.Map_Entities):
         print(self.pos[0:2])
         
     def render(self, screen):
-        screen.blit(self.surface, self.pos)
+        screen.blit(self.surface, screenCoords(self.pos))
 
     def getState(self):
         return {

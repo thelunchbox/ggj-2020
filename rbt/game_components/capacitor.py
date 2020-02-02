@@ -1,6 +1,7 @@
 from rbt.game_components import map_entities
 import pygame
 from rbt.utils.constants import CAPACITANCE_DRAIN
+from rbt.utils.utils import screenCoords
 
 class Capacitor(map_entities.Map_Entities):
     
@@ -21,7 +22,7 @@ class Capacitor(map_entities.Map_Entities):
         self.draining = False
         
     def render(self, screen):
-        screen.blit(self.surface, self.pos)
+        screen.blit(self.surface, screenCoords(self.pos))
 
     def getState(self):
         return {
