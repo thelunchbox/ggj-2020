@@ -1,17 +1,17 @@
 import pygame
-from rbt.utils.constants import TILES
+import json
+import os
 from rbt.utils.constants import TILE_PATHS
 from rbt.utils.constants import MAP_WIDTH
 from rbt.utils.constants import MAP_HEIGHT
 from rbt.utils.constants import TILE_WIDTH
 from rbt.utils.constants import TILE_HEIGHT
 from rbt.utils.constants import MAP_BORDER
-from rbt.utils.constants import SPAWN_POINTS
+from rbt.utils.constants import TILE_ENTITIES
 from rbt.utils.utils import screenCoords, mapCoords, getId, getClassName
 from rbt.game_components.tile import Tile
 from rbt.game_components.spawn import Spawn
 board = []
-
 
 TILE_SURFACES = []
 for file in TILE_PATHS:
@@ -22,7 +22,10 @@ class Map():
         self.surface = pygame.Surface(((TILE_WIDTH * MAP_WIDTH)+MAP_BORDER , (TILE_HEIGHT * MAP_HEIGHT)+MAP_BORDER))
         self.surface.fill((220,220,220))
         self.tiles = []
-        self.generateMap(TILES)
+        mapFile = open(os.path.join('rbt', 'game_components', 'maps', 'player_map.json'))
+        mapInfo = json.load(mapFile)
+        self.generateMap(mapInfo['tiles'])
+        self.initializeEntities(mapInfo['entities'])
 
     def generateMap(self, tiles):
         for x in range(MAP_WIDTH):
@@ -30,15 +33,18 @@ class Map():
             for y in range(MAP_HEIGHT):
                 self.tiles[x].append(Tile(tiles[y][x], (x,y), self, {}))
                 self.surface.blit(self.tiles[x][y].getBackground(), screenCoords((x,y)))
-        self.initializeSpawns()
 
-    def initializeSpawns(self):
-        for sp in SPAWN_POINTS:
-            t = sp[0]
-            owner = sp[1]
-            tile = self.tiles[t[0]][t[1]]
-            spawn = Spawn(t, getId(), owner)
-            tile.addEntity(spawn)
+    def initializeEntities(self, entities):
+        for x in range(MAP_WIDTH):
+            for y in range(MAP_HEIGHT):
+                tile = self.tiles[x][y]
+                entityId = entities[x][y]
+                entityInfo = TILE_ENTITIES[entityId].split('.')
+                entityType = entityInfo[0]
+                if entityType == 'Spawn':
+                    owner = int(entityInfo[1])
+                    spawn = Spawn((x,y), getId(), owner)
+                    tile.addEntity(spawn)
 
     def isSpawn(self, t, p):
         tile = self.tiles[t[0]][t[1]]

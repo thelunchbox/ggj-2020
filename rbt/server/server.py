@@ -14,6 +14,5 @@ def run(host, port):
         time.sleep(0.001)
         now = ticks(datetime.now())
         if (now - lastUpdate >= TICK_RATE):
-            print('UPDATE')
             gameServer.Process()
             lastUpdate = now
