@@ -15,8 +15,8 @@ class Bot():
         self.image = None
         self.slots = slots
         self.speed = 3
+        self.tools = [] # tools i've picked up
         self.ttl = STARTING_TTL
-        self.inventory = [] # tools i've picked up
         self.material = 0 # raw material
         self.owner = owner
         self.pos = (0,0)
@@ -30,16 +30,16 @@ class Bot():
         self.image = pygame.image.load(os.path.join('rbt', 'images', sprite))
 
     def getState(self):
-        inventoryState = {}
-        for t in self.inventory:
-            inventoryState[t.id] = t.getState()
+        toolState = {}
+        for tool in self.tools:
+            toolState[tool.toolID] = tool.getState()
 
         return {
             'id': self.id,
             'type': 'Bot',
             'slots': self.slots,
             'ttl': self.ttl,
-            'inventory': inventoryState,
+            'tools': toolState,
             'material': self.material,
             'pos': self.pos,
             'owner': self.owner
@@ -50,9 +50,8 @@ class Bot():
         self.ttl = botState['ttl']
         self.material = botState['material']
         self.pos = botState['pos']
+        self.tools = botState['tools']
         self.owner = botState['owner']
-        
-        #TODO: set inventory from state
 
     def move(self):
         #TODO : write better moving logic

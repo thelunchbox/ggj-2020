@@ -52,6 +52,15 @@ class Client():
                     self.serverConnection.send("addBot", { 'ports': 3 })
                 elif keystate[pygame.K_4]:
                     self.serverConnection.send("addBot", { 'ports': 4 })
+                elif keystate[pygame.K_5]:
+                    self.serverConnection.send("makeTool", {'toolType': 'attack'})
+                elif keystate[pygame.K_6]:
+                    self.serverConnection.send("makeTool", {'toolType': 'gather'})
+                elif keystate[pygame.K_7]:
+                    self.serverConnection.send("makeTool", {'toolType': 'build'})
+                elif keystate[pygame.K_8]:
+                    self.serverConnection.send("makeTool", {'toolType': 'signal'})
+
 
             ## Render the screen
             ####################
