@@ -6,7 +6,7 @@ from rbt.utils.constants import MAP_HEIGHT
 from rbt.utils.constants import TILE_WIDTH
 from rbt.utils.constants import TILE_HEIGHT
 from rbt.utils.constants import MAP_BORDER
-from rbt.utils.utils import screenCoords
+from rbt.utils.utils import screenCoords, mapCoords
 from rbt.game_components.tile import Tile
 board = []
 
@@ -31,10 +31,12 @@ class Map():
 
     def render(self, screen):
         screen.blit(self.surface, (0, 0))
-
+        mouseCoords = pygame.mouse.get_pos()
+        mapMouseCoords = mapCoords(mouseCoords)
         for x in range(MAP_WIDTH):
             for y in range(MAP_HEIGHT):
-                self.tiles[x][y].render(screen)
+                hover = mapMouseCoords[0] == x and mapMouseCoords[1] == y
+                self.tiles[x][y].render(screen, hover)
                 
     def update(self):
         pass

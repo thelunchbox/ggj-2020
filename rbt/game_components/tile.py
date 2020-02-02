@@ -1,7 +1,8 @@
 import pygame
 from rbt.utils.utils import getClassName
-from rbt.utils.constants import TILE_PATHS, TILE_EXITS
+from rbt.utils.constants import TILE_PATHS, TILE_EXITS, COLOR
 from rbt.game_components.bot import Bot
+from rbt.utils.utils import screenCoords
 
 class Tile():
     def __init__(self, index, pos, entities):
@@ -31,7 +32,11 @@ class Tile():
                     elif (bIsBot):
                         b.interact(a)
     
-    def render(self, screen):
+    def render(self, screen, hover):
+        if hover:
+            xy = screenCoords(self.pos)
+            pygame.draw.rect(screen, COLOR['cyan'], (xy[0], xy[1], 64, 64), 2)
+
         for entity in self.gameEntities.values():
             entity.render(screen)
 
