@@ -32,4 +32,3 @@ class Spawn(map_entities.Map_Entities):
 
     def clean(self):
         pass
-        

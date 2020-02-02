@@ -31,9 +31,9 @@ class Tile():
                         # do battle
                         pass
                     elif (aIsBot):
-                        a.interact(b)
+                        a.interact(b, getClassName(b))
                     elif (bIsBot):
-                        b.interact(a)
+                        b.interact(a, getClassName(a))
     
     def render(self, screen, hover):
         for entity in self.gameEntities.values():
