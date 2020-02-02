@@ -41,6 +41,7 @@ class Map():
 
     def setFromState(self, state):
         mapState = state['map']
+        
         for x in range(MAP_WIDTH):
             for y in range(MAP_HEIGHT):
                 tile = self.tiles[x][y]
@@ -52,7 +53,7 @@ class Map():
             mapState.append([])
             for y in range(MAP_HEIGHT):
                 tile = self.tiles[x][y]
-                mapState.append(tile.getState())
+                mapState[x].append(tile.getState())
         return {
             'map': mapState
         }
