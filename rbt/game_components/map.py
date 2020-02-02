@@ -27,7 +27,7 @@ class Tile():
 class Map():
     def __init__(self):
         self.surface = pygame.Surface(((TILE_WIDTH * MAP_WIDTH)+MAP_BORDER , (TILE_HEIGHT * MAP_HEIGHT)+MAP_BORDER))
-        self.surface.fill((255,255,255))
+        self.surface.fill((220,220,220))
         self.setBoard()
 
     def setBoard(self):
