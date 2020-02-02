@@ -96,6 +96,7 @@ TILE_PATHS = [
     "rbt/images/tiles/original/T_Path_64-4.png",
     "rbt/images/tiles/original/T_Path_64-3.png",
     "rbt/images/tiles/original/4_Way_64.png",
+    "rbt/images/tiles/original/Blank_64.png",
     "rbt/images/tiles/original/Dead_End_64_north.png",
     "rbt/images/tiles/original/Dead_End_64_south.png",
     "rbt/images/tiles/original/Dead_End_64_east.png",
