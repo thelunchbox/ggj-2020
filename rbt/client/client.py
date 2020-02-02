@@ -40,7 +40,7 @@ class Client():
                 ############################
                 if pygame.mouse.get_pressed()[0]:
                     coords = mapCoords(pygame.mouse.get_pos())
-                    if (coords[0] < 16 and coords[1] < 16 and coords[0] >= 0 and coords[1] >= 0)
+                    if (coords[0] < 16 and coords[1] < 16 and coords[0] >= 0 and coords[1] >= 0):
                         self.serverConnection.send("deployBot", { "pos": coords })
                 keystate = pygame.key.get_pressed()
 
