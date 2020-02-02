@@ -38,7 +38,7 @@ class Map():
     def initializeEntities(self, entities):
         for x in range(MAP_WIDTH):
             for y in range(MAP_HEIGHT):
-                tile = self.tiles[x][y]
+                tile = self.tiles[y][x]
                 entityId = entities[x][y]
                 entityInfo = TILE_ENTITIES[entityId].split('.')
                 entityType = entityInfo[0]
