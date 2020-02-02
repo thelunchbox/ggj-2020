@@ -16,7 +16,7 @@ class Client():
         self.game = GameState()
         self.serverConnection = ClientChannel(host, port, self)
         pygame.init()
-        pygame.display.set_caption('GREMLIN DONGLES')
+        pygame.display.set_caption('BLUETOOTH BYTES')
         self.screen = pygame.display.set_mode(SCREEN_RESOLUTION)
 
     def waitForPlayers(self):
