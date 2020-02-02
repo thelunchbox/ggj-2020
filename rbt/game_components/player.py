@@ -72,12 +72,16 @@ class Player(pygame.sprite.Sprite):
     def setFromState(self, playerState):
         self.pos = playerState['pos']
         self.resource = playerState['resource']
+        self.bots = playerState['bots']
+        self.tools = playerState['tools']
 
-    def make_tool(self, toolID, toolType):
+    def make_tool(self, toolID, type):
+        print("making a tool", type, self.resource);
         if self.resource >= TOOL_COST:
-            tool = Tool(toolID, toolType, self.id)
-            self.inventory.append(tool)
+            tool = Tool(toolID, type, self.id)
+            self.tools.append(tool)
             self.resource-=TOOL_COST
+            print("made tool", type, self.resource);
             return tool
         else:
             print(self.id, 'player out of resources!')

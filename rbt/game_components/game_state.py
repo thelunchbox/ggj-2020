@@ -1,3 +1,4 @@
+from rbt.game_components.hud import Hud
 from rbt.game_components.player import Player
 from rbt.game_components.map import Map
 
@@ -5,6 +6,7 @@ class GameState():
     def __init__(self):
         self.players = {}
         self.map = Map()
+        self.hud = Hud()
         #TODO: End Game
 
     def getState(self):
@@ -39,5 +41,6 @@ class GameState():
 
     def render(self, screen):
         self.map.render(screen)
+        self.hud.render(screen)
         #for p in self.players.values():
         #    p.render(screen)
