@@ -21,9 +21,9 @@ def getClassName(x):
     return x.__class__.__name__
 
 
-def screenCoords((x,y)):
-    return ((TILE_WIDTH*x) + HALF_MAP_BORDER, (TILE_HEIGHT*y) + HALF_MAP_BORDER)
+def screenCoords(coords):
+    return ((TILE_WIDTH * coords[0]) + HALF_MAP_BORDER, (TILE_HEIGHT * coords[1]) + HALF_MAP_BORDER)
 
 
-def mapCoords((x,y)):
-    return ((x-HALF_MAP_BORDER)%TILE_WIDTH, (x-HALF_MAP_BORDER)%TILE_HEIGHT)
+def mapCoords(coords):
+    return ((coords[0] - HALF_MAP_BORDER) % TILE_WIDTH, (coords[1] - HALF_MAP_BORDER) % TILE_HEIGHT)
