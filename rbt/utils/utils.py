@@ -1,4 +1,5 @@
 import socket
+import uuid
 
 def getHostAddr():
     # hostname = socket.gethostname()
@@ -8,3 +9,6 @@ def getHostAddr():
     host = s.getsockname()[0]
     s.close()
     return host
+
+def getId():
+    return str(uuid.uuid1())
