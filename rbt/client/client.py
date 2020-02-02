@@ -22,6 +22,9 @@ class Client():
         pygame.mixer.music.load('BTB_Overture.wav')
         pygame.mixer.music.play(-1)
 
+        # Flag for handling mouse input
+        self.handleClick = False
+
     def waitForPlayers(self):
         print("Waiting for other players")
         while len(self.game.players.values()) != MAX_PLAYERS:
@@ -44,7 +47,8 @@ class Client():
 
                 ## Send inputs to the server
                 ############################
-                if pygame.mouse.get_pressed()[0]:
+                if pygame.mouse.get_pressed()[0] and not self.handleClick:
+                    self.handleClick = True
                     coords = mapCoords(pygame.mouse.get_pos())
                     screenCoords = pygame.mouse.get_pos()
                     if (coords[0] < 16 and coords[1] < 16 and coords[0] >= 0 and coords[1] >= 0):
@@ -60,12 +64,8 @@ class Client():
                             self.serverConnection.send("makeTool", {'type': 'build'})
                         if(isOver((SIGNAL_BUTTON_X, SIGNAL_BUTTON_Y ), screenCoords) ):
                             self.serverConnection.send("makeTool", {'type': 'signal'})
-                elif pygame.mouse.get_pressed()[2]:
-                    coords = mapCoords(pygame.mouse.get_pos())
-                    print("MAP COORDS:", coords)
-                    tile = self.game.map.getTile(coords)
-                    print("TILE Data:", tile.exits)
-
+                elif not pygame.mouse.get_pressed()[0] and self.handleClick:
+                    self.handleClick = False
 
                 keystate = pygame.key.get_pressed()
 
