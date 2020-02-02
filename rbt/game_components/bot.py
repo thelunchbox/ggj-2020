@@ -61,7 +61,7 @@ class Bot():
             self.pos = tuple(map(operator.sub, self.pos, (0, self.speed)))
 
     def update(self):
-        self.move()
+        # self.move()
         self.ttl -= SIGNAL_DECAY
         if (self.ttl <= 0):
             self.expired = True

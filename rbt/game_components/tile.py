@@ -77,12 +77,14 @@ class Tile():
                 self.removeEntity(self.gameEntities[key])
 
     def update(self):
+        destroyedEntityIds = []
         for entity in self.gameEntities.values():
             entity.update()
-
-        for entity in self.gameEntities.values():
             if (entity.expired):
-                self.removeEntity(entity)
+                destroyedEntityIds.append(entity.id)
+
+        for key in destroyedEntityIds:
+                self.removeEntity(self.gameEntities[key])
 
     def getState(self):
         entityStates = {}

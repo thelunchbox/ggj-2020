@@ -11,6 +11,7 @@ class Spawn(map_entities.Map_Entities):
         self.surface.fill((168,30,20))
         self.id = id
         self.player = player
+        self.expired = False
         
     def render(self, screen):
         screen.blit(self.surface, screenCoords(self.pos))

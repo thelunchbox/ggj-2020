@@ -59,7 +59,10 @@ class Map():
                 self.tiles[x][y].render(screen, hover)
                 
     def update(self):
-        pass
+        for x in range(MAP_WIDTH):
+            for y in range(MAP_HEIGHT):
+                tile = self.tiles[x][y]
+                tile.update()
 
     def setFromState(self, state):
         mapState = state['map']
