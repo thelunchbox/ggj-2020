@@ -30,6 +30,8 @@ RESISTOR_DAMAGE = 50
 MAP_WIDTH = 16     # in tiles
 MAP_HEIGHT = 16
 
+TICK_RATE = 4000000
+
 SPAWN_POINTS = [
     [(0,0), 1],
     [(1,0), 1],

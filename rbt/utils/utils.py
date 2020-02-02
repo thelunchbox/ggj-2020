@@ -1,5 +1,6 @@
 import socket
 import uuid
+from datetime import datetime
 
 from rbt.utils.constants import TILE_WIDTH, TILE_HEIGHT, MAP_BORDER
 
@@ -27,3 +28,6 @@ def screenCoords(coords):
 
 def mapCoords(coords):
     return (int((coords[0] - HALF_MAP_BORDER) / TILE_WIDTH), int((coords[1] - HALF_MAP_BORDER) / TILE_HEIGHT))
+
+def ticks(dt):
+    return (dt - datetime(1, 1, 1)).total_seconds() * 10000000

@@ -14,7 +14,6 @@ class Bot():
         self.id = id
         self.image = None
         self.slots = slots
-        self.speed = 3
         self.tools = [] # tools i've picked up
         self.ttl = STARTING_TTL
         self.material = 0 # raw material
