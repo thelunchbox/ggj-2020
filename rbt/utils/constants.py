@@ -28,6 +28,9 @@ RESISTOR_DAMAGE = 50
 MAP_WIDTH = 16     # in tiles
 MAP_HEIGHT = 16
 
+TILE_WIDTH  = 64
+TILE_HEIGHT = 64
+
 TILES = [
     [ 11, 0, 11, 11, 11, 11, 11, 11, 11, 11, 0, 11, 11, 11, 11, 1 ],
     [ 11, 0, 11, 11, 11, 11, 11, 11, 11, 11, 0, 11, 11, 11, 11, 1 ],
