@@ -1,1 +1,0 @@
-All client-related code goes in this folder.

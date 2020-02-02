@@ -17,7 +17,7 @@ windows: `python ./server.py`
 
 
 Then start the client by running the following command from the root directory.
-osx: `python3 ./main.py`
-windows: `python ./main.py`
+osx: `python3 ./main.py [ipaddress]`
+windows: `python ./main.py [ipaddress]`
 
 To quit the client, type `q`.
