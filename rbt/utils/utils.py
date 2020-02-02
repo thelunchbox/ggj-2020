@@ -26,4 +26,4 @@ def screenCoords(coords):
 
 
 def mapCoords(coords):
-    return ((coords[0] - HALF_MAP_BORDER) % TILE_WIDTH, (coords[1] - HALF_MAP_BORDER) % TILE_HEIGHT)
+    return (int((coords[0] - HALF_MAP_BORDER) / TILE_WIDTH), int((coords[1] - HALF_MAP_BORDER) / TILE_HEIGHT))
