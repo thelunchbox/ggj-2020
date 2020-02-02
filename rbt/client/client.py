@@ -55,7 +55,6 @@ class Client():
 
             ## Render the screen
             ####################
-            self.screen.fill((0,0,0))
             self.game.render(self.screen)
             pygame.display.flip()
 

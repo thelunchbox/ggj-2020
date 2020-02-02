@@ -39,5 +39,5 @@ class GameState():
 
     def render(self, screen):
         self.map.render(screen)
-        for p in self.players.values():
-            p.render(screen)
+        #for p in self.players.values():
+        #    p.render(screen)
