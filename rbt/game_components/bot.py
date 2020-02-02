@@ -20,7 +20,9 @@ class Bot():
         self.material = 0 # raw material
         self.owner = owner
         self.pos = (0,0)
+        self.targetPos = (0,0)
         self.dead = False
+        self.clean = True
 
     def set_pos(self, pos):
         self.pos = pos
@@ -54,20 +56,16 @@ class Bot():
         
         #TODO: set inventory from state
 
-    def move(self):
-        #TODO : write better moving logic
-        if self.owner == 1:
-            self.pos = tuple(map(operator.add, self.pos, (0, self.speed)))
-        else:
-            self.pos = tuple(map(operator.sub, self.pos, (0, self.speed)))
+    def update(self, tile):
+        if self.dirty == False:
+            self.dirty = True
+            tile.moveEntity(self, tile.getDirection(self.targetPos))
+            self.ttl -= SIGNAL_DECAY
+            if (self.ttl <= 0):
+                self.dead = True
 
-    def update(self):
-        self.move()
-        self.ttl -= SIGNAL_DECAY
-        if (self.ttl <= 0):
-            self.dead = True
-        if (self.pos[1] > 1020 or self.pos[1] < 0): #TODO: fix me
-            self.dead = True
+    def clean(self):
+        self.dirty = False
 
     def render(self, screen):
         if (self.image):

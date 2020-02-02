@@ -5,11 +5,12 @@ from rbt.game_components.bot import Bot
 from rbt.utils.utils import screenCoords
 
 class Tile():
-    def __init__(self, index, pos, entities):
+    def __init__(self, index, pos, map, entities):
         self.surface = pygame.image.load(TILE_PATHS[index])
         self.exits = TILE_EXITS[index]
         self.gameEntities = entities # this is a dictionary
         self.pos = pos
+        self.map = map
 
     def addEntity(self, entity):
         self.gameEntities[entity.id] = entity
@@ -65,7 +66,10 @@ class Tile():
 
     def update(self):
         for entity in self.gameEntities.values():
-            entity.update()
+            entity.clean()
+
+        for entity in self.gameEntities.values():
+            entity.update(self)
 
         for entity in self.gameEntities.values():
             if (entity.expired):
@@ -79,5 +83,21 @@ class Tile():
             'entities': entityStates
         }
 
-    def getExit(self):
-        pass
+    def getDirection(self, targetPos):
+        return random.choice(self.exits)
+
+    def moveEntity(self, id, direction):
+        print("I am a lobster")
+        targetTile = None
+        if(direction == "north"):
+            targetTile =self.map.getTile((self.pos[0], self.pos[1]-1))
+        elif(direction == "south"):
+            targetTile =self.map.getTile((self.pos[0], self.pos[1]+2))
+        elif(direction == "east"):
+            targetTile =self.map.getTile((self.pos[0]+1, self.pos[1]))
+        else:
+            targetTile =self.map.getTile((self.pos[0]-1, self.pos[1]))
+        if targetTile:
+            targetTile.addEntitiy(self.gameEntities[id])
+            self.removeEntity(self.gameEntities[id])
+

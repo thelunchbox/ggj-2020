@@ -25,7 +25,10 @@ class Material(map_entities.Map_Entities):
             'type': self.type
         }
         
-    def update(self):
+    def update(self, tile):
         if (self.tearDown):
             print("Now destroying material " + self.id)
+
+    def clean(self):
+        pass
         

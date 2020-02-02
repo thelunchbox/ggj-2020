@@ -24,7 +24,9 @@ class Spawn(map_entities.Map_Entities):
             'type': self.type
         }
 
-    def update(self):
+    def update(self, tile):
         pass
-        
+
+    def clean(self):
+        pass
         

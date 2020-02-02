@@ -31,7 +31,7 @@ class Capacitor(map_entities.Map_Entities):
             'type': self.type
         }
 
-    def update(self):
+    def update(self, tile):
         if (self.draining):
             self.value -= CAPACITANCE_DRAIN
         elif (self.value < self.max):
@@ -40,4 +40,7 @@ class Capacitor(map_entities.Map_Entities):
                 self.value = self.max
         if (self.tearDown):
             print("Now destroying capacitor " + self.id)
+
+    def clean(self):
+        pass
         

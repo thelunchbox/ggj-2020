@@ -34,10 +34,12 @@ class Resistor(map_entities.Map_Entities):
                 'type': self.type
             }
 
-    def update(self):
+    def update(self, tile):
         if (self.destroying):
             self.value -= RESISTOR_DAMAGE
         if (self.tearDown):
             print("Now destroying resistor " + self.id)
-        
+
+    def clean(self):
+        pass
         
