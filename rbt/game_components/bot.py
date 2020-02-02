@@ -2,6 +2,8 @@ import pygame
 import random
 import operator
 
+from rbt.utils.constants import SIGNAL_DECAY
+
 # This class represents the robots that the player controls
 
 class Bot():
@@ -10,12 +12,13 @@ class Bot():
         self.botID = botID
         self.image = pygame.Surface((30,30))
         self.slots = slots
-        self.speed = 1
+        self.speed = 3
         self.ttl = 32000 #TODO: replace with config
         self.inventory = [] # tools i've picked up
         self.material = 0 # raw material
         self.owner = owner
         self.pos = (0,0)
+        self.dead = False
 
     def set_pos(self, pos):
         self.pos = pos
@@ -55,6 +58,9 @@ class Bot():
 
     def update(self):
         self.move()
+        self.ttl -= SIGNAL_DECAY
+        if (self.ttl <= 0):
+            self.dead = True
 
     def render(self, screen):
         screen.blit(self.image, self.pos)

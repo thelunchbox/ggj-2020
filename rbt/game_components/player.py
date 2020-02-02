@@ -4,7 +4,7 @@ from rbt.game_components.bot import Bot
 
 # This class represents the player
 from rbt.game_components.test_entities import Circle
-from rbt.utils.constants import PLAYER_COLORS
+from rbt.utils.constants import PLAYER_COLORS, STARTING_RESOURCES
 
 
 class Player(pygame.sprite.Sprite):
@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.id = id
         self.connection = 0
         self.address = 0
-        self.resource = 500
+        self.resource = STARTING_RESOURCES
         self.bots = []
         self.inputs = {}
 
@@ -44,6 +44,11 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         for bot in self.bots:
             bot.update()
+            if (bot.pos[1] > 1020 or bot.pos[1] < 0):
+                bot.dead = True
+
+        for bot in self.bots:
+            self.bots.remove(bot)
 
     def getState(self):
         botStates = {}
