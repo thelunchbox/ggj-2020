@@ -26,3 +26,18 @@ class Tile():
                         a.interact(b)
                     elif (bIsBot):
                         b.interact(a)
+    
+    def render(self):
+        pass
+
+    def setTileFromState(self):
+        pass
+
+    def update(self):
+        pass
+    
+    def getState(self):
+        pass
+
+    def getExit(self):
+        pass
