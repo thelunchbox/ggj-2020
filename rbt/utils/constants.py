@@ -77,11 +77,11 @@ TILE_MAP = {
     8: "trisouth",
     9: "trieast",
     10: "clover", # connects all
-    11: "blank" #connects none
-    12: "northend" #connects none
-    13: "southend" #connects none
-    14: "eastend" #connects none
-    15: "westend" #connects none
+    11: "blank", #connects none
+    12: "northend",
+    13: "southend",
+    14: "eastend",
+    15: "westend"
 }
 
 TILE_PATHS = [
