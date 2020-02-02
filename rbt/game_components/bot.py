@@ -71,9 +71,11 @@ class Bot():
         if (self.image):
             screen.blit(self.image, screenCoords(self.pos))
         if (self.success):
-            font = pygame.font.SysFont('comicsans', 20)
-            color = (20,130,198) if self.owner == 1 else (168,30,20)
-            text = font.render('A WINNER IS YOU', 1, color)
+            font = pygame.font.SysFont('comicsans', 50)
+            if self.owner == 1:
+                text = font.render('BLUE WINS!', 1, (20,130,198))
+            else:
+                text = font.render('RED WINS!', 1, (168,30,20))
             screen.blit(text, (100, 100))
 
     def interact(self, entity, entityType):

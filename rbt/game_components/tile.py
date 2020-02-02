@@ -28,8 +28,10 @@ class Tile():
                     aIsBot = getClassName(a) == 'Bot'
                     bIsBot = getClassName(b) == 'Bot'
                     if (aIsBot and bIsBot):
-                        # do battle
-                        pass
+                        if (a.owner != b.owner):
+                            # do battle!
+                            a.expired = True
+                            b.expired = True
                     elif (aIsBot):
                         a.interact(b, getClassName(b))
                     elif (bIsBot):
@@ -85,6 +87,9 @@ class Tile():
 
         for entity in self.gameEntities.values():
             entity.update(self)
+
+        for entity in self.gameEntities.values():
+            self.checkCollisions()
 
         for entity in self.gameEntities.values():
             if (entity.expired):
