@@ -23,7 +23,13 @@ class ClientChannel(Channel):
 
     def Network_deployBot(self, data):
         # get a bot from the player's inventory (or cheat in dev)
+
+        #### DEV ONLY ####
         bot = self.player.create_bot(getId(), data['data']['ports'])
+        # if we did not create a bot, we were out of resources
+        if (not bot) return False
+        #### DEV ONLY ####
+
         # and then add it to the tile at the coordinates specified
         x = data['data']['x']
         y = data['data']['y']
