@@ -12,3 +12,6 @@ def getHostAddr():
 
 def getId():
     return str(uuid.uuid1())
+
+def getClassName(x):
+    return x.__class__.__name__

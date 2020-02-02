@@ -8,8 +8,8 @@ from rbt.utils.constants import SIGNAL_DECAY
 
 class Bot():
 
-    def __init__(self, botID, slots, owner):
-        self.botID = botID
+    def __init__(self, id, slots, owner):
+        self.id = id
         self.image = pygame.Surface((30,30))
         self.slots = slots
         self.speed = 3
@@ -29,10 +29,10 @@ class Bot():
     def getState(self):
         inventoryState = {}
         for t in self.inventory:
-            inventoryState[t.toolID] = t.getState()
+            inventoryState[t.id] = t.getState()
 
         return {
-            'botID': self.botID,
+            'id': self.id,
             'slots': self.slots,
             'ttl': self.ttl,
             'inventory': inventoryState,
@@ -64,4 +64,7 @@ class Bot():
 
     def render(self, screen):
         screen.blit(self.image, self.pos)
+
+    def interact(self, entity):
+        pass
         

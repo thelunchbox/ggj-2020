@@ -38,7 +38,7 @@ class Player(pygame.sprite.Sprite):
 
     def get_bot(self, botID):
         for bot in self.bots:
-            if bot.botID == botID:
+            if bot.id == botID:
                 return bot
 
     def update(self):
@@ -54,7 +54,7 @@ class Player(pygame.sprite.Sprite):
     def getState(self):
         botStates = {}
         for bot in self.bots:
-            botStates[bot.botID] = bot.getState()
+            botStates[bot.id] = bot.getState()
 
         return {
             "id": self.id,
@@ -82,10 +82,10 @@ class Player(pygame.sprite.Sprite):
                 self.bots.append(bot)
 
         for bot in self.bots:
-            if (not allBots.get(bot.botID, False)):
+            if (not allBots.get(bot.id, False)):
                 self.bots.remove(bot)
             else:
-                bot.setBotFromState(allBots[bot.botID])
+                bot.setBotFromState(allBots[bot.id])
 
         self.pos = playerState['pos']
         self.resource = playerState['resource']

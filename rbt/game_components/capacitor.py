@@ -5,17 +5,17 @@ from rbt.utils.constants import CAPACITANCE_DRAIN
 class Capacitor(map_entities.Map_Entities):
     
     # Requires a position, a capacitor value, and unique capacitor ID     
-    def __init__(self, pos, ID, max):
+    def __init__(self, pos, id, max):
         super(Capacitor, self).set_pos(pos, 'Capacitor')
         self.surface = pygame.Surface((30,30))
         self.surface.fill((36,94,255))
-        self.ID = ID
+        self.id = id
         # The current amount of charge available in the capacitor
         self.value = max
         # The maximum capacitance of the capacitor
         self.max = max
         self.tearDown = False
-        print('New transistor created with ID [' + self.ID + ' at:')
+        print('New transistor created with ID [' + self.id + ' at:')
         print(self.pos[0:2])
 
         self.draining = False
@@ -38,5 +38,5 @@ class Capacitor(map_entities.Map_Entities):
             if (self.value > self.max): # whoops we might have gone past
                 self.value = self.max
         if (self.tearDown):
-            print("Now destroying capacitor " + self.ID)
+            print("Now destroying capacitor " + self.id)
         
