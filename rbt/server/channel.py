@@ -25,13 +25,14 @@ class ClientChannel(Channel):
         # get a bot from the player's inventory (or cheat in dev)
 
         #### DEV ONLY ####
-        bot = self.player.create_bot(getId(), data['data']['ports'])
+        bot = self.player.create_bot(getId(), 2)
         # if we did not create a bot, we were out of resources
         if (not bot):
             return False
         #### DEV ONLY ####
 
         # and then add it to the tile at the coordinates specified
-        x = data['data']['x']
-        y = data['data']['y']
+        pos = data['data']['pos']
+        x = pos[0]
+        y = pos[1]
         self.game.map.tiles[x][y].addEntity(bot)
