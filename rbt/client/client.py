@@ -41,7 +41,16 @@ class Client():
                 if pygame.mouse.get_pressed()[0]:
                     coords = pygame.mouse.get_pos()
                     self.serverConnection.send("updatePlayer", { "pos": coords })
+                keystate = pygame.key.get_pressed()
 
+                if keystate[pygame.K_1]:
+                    self.serverConnection.send("addBot", { 'ports': 1 })
+                elif keystate[pygame.K_2]:
+                    self.serverConnection.send("addBot", { 'ports': 2 })
+                elif keystate[pygame.K_3]:
+                    self.serverConnection.send("addBot", { 'ports': 3 })
+                elif keystate[pygame.K_4]:
+                    self.serverConnection.send("addBot", { 'ports': 4 })
 
             ## Render the screen
             ####################

@@ -1,36 +1,91 @@
+import pygame
+import random
 from rbt.game_components.bot import Bot
-from rbt.game_components.test_entities import Circle #TODO: Testing -> Remove later
-from rbt.utils.constants import PLAYER_COLORS
 
 # This class represents the player
-class Player():
+from rbt.game_components.test_entities import Circle
+from rbt.utils.constants import PLAYER_COLORS, STARTING_RESOURCES
+
+
+class Player(pygame.sprite.Sprite):
     def __init__(self, id):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface((50, 100))
         self.id = id
-        self.resource = 0
-        self.botCount = 0
+        self.connection = 0
+        self.address = 0
+        self.resource = STARTING_RESOURCES
+        self.bots = []
         self.inputs = {}
+
+        self.yStart = 20 if id == 1 else 800
 
         # TESTING: REMOVE LATER
         self.circle = Circle(PLAYER_COLORS[self.id])
         self.pos = (100,100)
 
-    # Create a bot and add it to the list of existing bots. Increment bot count by 1.
-    def createBot(self, bots):
-        bot = Bot()
-        bots.add(bots)
-        self.botCount+1
+    # Create a bot and add it to the list of existing bots.
+    def create_bot(self, botID, slots):
+        resourceCost = 2 + ( slots * 3 )
+        if resourceCost <= self.resource:
+            bot = Bot(botID, slots, self.id)
+            self.bots.append(bot)
+            self.resource -= resourceCost
+            bot.set_pos((random.randrange(50, 1450), self.yStart))
+            return bot
+        else:
+            print(self.id, 'player out of resources!')
+
+    def get_bot(self, botID):
+        for bot in self.bots:
+            if bot.botID == botID:
+                return bot
+
+    def update(self):
+        for bot in self.bots:
+            bot.update()
+            if (bot.pos[1] > 1020 or bot.pos[1] < 0):
+                bot.dead = True
+
+        for bot in self.bots:
+            if (bot.dead):
+                self.bots.remove(bot)
 
     def getState(self):
+        botStates = {}
+        for bot in self.bots:
+            botStates[bot.botID] = bot.getState()
+
         return {
             "id": self.id,
-            "pos": self.pos
+            "pos": self.pos,
+            "resource": self.resource,
+            "bots": botStates
         }
-    
+
     def captureInput(self, inputs):
         self.inputs = inputs
 
     def render(self, screen):
         self.circle.render(screen, self.pos)
+        for bot in self.bots:
+            bot.render(screen)
+
 
     def setPlayerFromState(self, playerState):
+        # create any new player that doesn't exist
+        allBots = playerState['bots']
+        for botID in allBots.keys():
+            if (not self.get_bot(botID)):
+                bot = Bot(botID, allBots[botID]['slots'], self.id)
+                bot.set_color((0,255,0))
+                self.bots.append(bot)
+
+        for bot in self.bots:
+            if (not allBots.get(bot.botID, False)):
+                self.bots.remove(bot)
+            else:
+                bot.setBotFromState(allBots[bot.botID])
+
         self.pos = playerState['pos']
+        self.resource = playerState['resource']
