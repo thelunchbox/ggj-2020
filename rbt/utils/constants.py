@@ -81,18 +81,18 @@ TILE_MAP = {
 }
 
 TILE_PATHS = [
-    "rbt/images/tiles/Vertical_64.png",
-    "rbt/images/tiles/Horizontal_64.png",
-    "rbt/images/tiles/L_Turn_64-3.png",
-    "rbt/images/tiles/L_Turn_64-2.png",
-    "rbt/images/tiles/L_Turn_64-1.png",
-    "rbt/images/tiles/L_Turn_64-4.png",
-    "rbt/images/tiles/T_Path_64-2.png",
-    "rbt/images/tiles/T_Path_64-1.png",
-    "rbt/images/tiles/T_Path_64-4.png",
-    "rbt/images/tiles/T_Path_64-3.png",
-    "rbt/images/tiles/4_Way_64.png",
-    "rbt/images/tiles/Blank_64.png"
+    "rbt/images/tiles/original/Vertical_64.png",
+    "rbt/images/tiles/original/Horizontal_64.png",
+    "rbt/images/tiles/original/L_Turn_64-3.png",
+    "rbt/images/tiles/original/L_Turn_64-2.png",
+    "rbt/images/tiles/original/L_Turn_64-1.png",
+    "rbt/images/tiles/original/L_Turn_64-4.png",
+    "rbt/images/tiles/original/T_Path_64-2.png",
+    "rbt/images/tiles/original/T_Path_64-1.png",
+    "rbt/images/tiles/original/T_Path_64-4.png",
+    "rbt/images/tiles/original/T_Path_64-3.png",
+    "rbt/images/tiles/original/4_Way_64.png",
+    "rbt/images/tiles/original/Blank_64.png"
 ]
 
 TILE_EXITS = [
