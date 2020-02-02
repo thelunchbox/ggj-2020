@@ -45,4 +45,16 @@ TILES = [
 
 #TILE_PATHS = [ "rbt/game_components/T_Path.png","rbt/game_components/L_Turn.png","rbt/game_components/Vertical_Path.png","rbt/game_components/Green_Clear.png" ]
 
-TILE_PATHS = [ "rbt/images/4_Way_64.png","rbt/images/Blank_64.png","rbt/images/Bluetooth_64.png","rbt/images/Green_Clear.png","rbt/images/Horizontal_64.png","rbt/images/L_Turn_64-1.png","rbt/images/L_Turn_64-2.png","rbt/images/L_Turn_64-3.png","rbt/images/L_Turn_64-4.png","rbt/images/L_Turn.png","rbt/images/Redtooth_64.png","rbt/images/T_Path_64-1.png","rbt/images/T_Path_64-2.png","rbt/images/T_Path_64-3.png","rbt/images/T_Path_64-4.png","rbt/images/T_Path.png","rbt/images/Transistor_64.png","rbt/images/Vertical_64.png","rbt/images/Vertical_Path.png" ]
+TILE_PATHS = [ 
+"rbt/images/tiles/4_Way_64.png",
+"rbt/images/tiles/Blank_64.png",
+"rbt/images/tiles/Horizontal_64.png",
+"rbt/images/tiles/L_Turn_64-1.png",
+"rbt/images/tiles/L_Turn_64-2.png",
+"rbt/images/tiles/L_Turn_64-3.png",
+"rbt/images/tiles/L_Turn_64-4.png",
+"rbt/images/tiles/T_Path_64-1.png",
+"rbt/images/tiles/T_Path_64-2.png",
+"rbt/images/tiles/T_Path_64-3.png",
+"rbt/images/tiles/T_Path_64-4.png",
+"rbt/images/tiles/Vertical_64.png"]
