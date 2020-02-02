@@ -4,9 +4,9 @@ from rbt.utils.utils import getClassName
 from rbt.game_components.bot import Bot
 
 class Tile():
-    def __init__(self, config, entities):
-        self.surface = pygame.image.load(config.tileImage)
-        self.openPaths = config.openPaths
+    def __init__(self, index, entities):
+        self.surface = pygame.image.load(TILE_PATHS[index])
+        self.exits = TILE_EXITS[index]
         self.gameEntities = entities # this is a dictionary
 
     def addEntity(self, entity):
