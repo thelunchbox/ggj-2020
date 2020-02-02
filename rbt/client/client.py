@@ -17,7 +17,7 @@ class Client():
         self.serverConnection = ClientChannel(host, port, self)
         pygame.init()
         pygame.display.set_caption('BLUETOOTH BYTES')
-        self.screen = pygame.display.set_mode(SCREEN_RESOLUTION)
+        self.screen = pygame.display.set_mode(SCREEN_RESOLUTION, pygame.FULLSCREEN)
         pygame.mixer.music.load('BTB_Overture.wav')
         pygame.mixer.music.play(-1)
 
