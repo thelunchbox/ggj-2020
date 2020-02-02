@@ -23,6 +23,6 @@ class Tile_Dictionary():
             2: "resistor",
             3: "transistor",
             4: "material",
-            5: "tool"
+            5: "tool",
             6: "spawn"
         }
