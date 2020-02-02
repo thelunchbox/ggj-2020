@@ -40,8 +40,21 @@ class Map():
         pass
 
     def setFromState(self, state):
-        pass
+        mapState = state['map']
+        for x in range(MAP_WIDTH):
+            for y in range(MAP_HEIGHT):
+                tile = self.tiles[x][y]
+                tile.setFromState(mapState[x][y])
 
     def getState(self):
-        pass
+        mapState = []
+        for x in range(MAP_WIDTH):
+            mapState.append([])
+            for y in range(MAP_HEIGHT):
+                tile = self.tiles[x][y]
+                mapState.append(tile.getState())
+        return {
+            'map': mapState
+        }
+            
 
