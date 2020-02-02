@@ -103,7 +103,9 @@ class Tile():
 
     def getDirection(self, targetPos):
         if self.exits:
-            return random.choice(self.exits)
+            exitDirection = random.choice(self.exits)
+            print (exitDirection)
+            return exitDirection
         return 'None'
 
     def moveEntity(self, entity, direction):
