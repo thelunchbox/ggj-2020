@@ -3,6 +3,7 @@ import random
 from rbt.game_components.bot import Bot
 
 # This class represents the player
+from rbt.game_components.button import Button
 from rbt.game_components.test_entities import Circle
 from rbt.game_components.tools import Tool
 from rbt.utils.constants import PLAYER_COLORS, STARTING_RESOURCES, TOOL_COST
@@ -17,9 +18,11 @@ class Player(pygame.sprite.Sprite):
         self.address = 0
         self.resource = STARTING_RESOURCES
         self.tools = []
+        tool = Tool(12,'attack',self.id)
+        self.tools.append(tool)
         self.bots = []
         self.inputs = {}
-
+        self.buttons = self.generate()
         self.yStart = 20 if id == 1 else 800
 
         # TESTING: REMOVE LATER
@@ -67,7 +70,21 @@ class Player(pygame.sprite.Sprite):
         self.inputs = inputs
 
     def render(self, screen):
-        self.circle.render(screen, self.pos)
+        self.generate()
+        for button in self.buttons:
+            button.draw(screen)
+
+    def generate(self):
+        buttons= []
+        resource_button = Button((255, 255, 255), 1100, 500, 200, 50, str(self.resource))
+        buttons.append(resource_button)
+        offset = 50
+        for tool in self.tools:
+            if isinstance(tool,Tool):
+                tool_button = Button((255, 255, 255), 1100, 500 + offset, 200, 50, str(tool.type))
+                buttons.append(tool_button)
+                offset += 50
+        return buttons
 
     def setFromState(self, playerState):
         self.pos = playerState['pos']

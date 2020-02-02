@@ -15,6 +15,7 @@ class ClientChannel(ConnectionListener):
 
     def Network_setId(self, data):
         self.client.playerID = data["data"]["id"]
+        self.client.game.playerID = data['data']['id']
         print("Got id from server", self.client.playerID)
 
     def Network_gameAborted(self, data):

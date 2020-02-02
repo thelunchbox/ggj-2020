@@ -7,6 +7,7 @@ class GameState():
         self.players = {}
         self.map = Map()
         self.hud = Hud()
+        self.playerID = None
         #TODO: End Game
 
     def getState(self):
@@ -34,13 +35,13 @@ class GameState():
                 self.players[pState] = Player(pState)
 
         # update all the plrs
-        for p in self.players.keys():
-            self.players[p].setFromState(state["players"][p])
+        if self.playerID:
+            self.players[self.playerID].setFromState(state["players"][self.playerID])
 
         self.map.setFromState(state['map'])
 
     def render(self, screen):
         self.map.render(screen)
         self.hud.render(screen)
-        #for p in self.players.values():
-        #    p.render(screen)
+        for p in self.players.values():
+            p.render(screen)
