@@ -8,11 +8,11 @@ from rbt.utils.constants import PLAYER_COLORS
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, playerID):
+    def __init__(self, id):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((50, 100))
         self.rect = self.image.get_rect()
-        self.playerID = playerID
+        self.id = id
         self.connection = 0
         self.address = 0
         self.resource = 500
@@ -27,7 +27,7 @@ class Player(pygame.sprite.Sprite):
     def create_bot(self, botID, slots):
         resourceCost = 2 + ( slots * 3 )
         if resourceCost <= self.resource:
-            bot = Bot(botID, slots, self.playerID)
+            bot = Bot(botID, slots, self.id)
             self.bots.append(bot)
             self.resource -= resourceCost
             return bot
