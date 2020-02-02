@@ -20,6 +20,9 @@ class Client():
         self.screen = pygame.display.set_mode(SCREEN_RESOLUTION)
         pygame.mixer.music.load('BTB_Overture.wav')
         pygame.mixer.music.play(-1)
+        
+        # Flag for handling mouse input
+        self.handleClick = False
 
     def waitForPlayers(self):
         print("Waiting for other players")
@@ -43,12 +46,15 @@ class Client():
 
                 ## Send inputs to the server
                 ############################
-                if pygame.mouse.get_pressed()[0]:
+                if pygame.mouse.get_pressed()[0] and not self.handleClick:
+                    self.handleClick = True
+                    print("Handling exactly ONE click!")
                     coords = mapCoords(pygame.mouse.get_pos())
                     screenCoords = pygame.mouse.get_pos()
                     if (coords[0] < 16 and coords[1] < 16 and coords[0] >= 0 and coords[1] >= 0):
                         # this is a click on the MAP
                         if (self.game.map.isSpawn(coords, self.playerID)):
+                            
                             self.serverConnection.send("deployBot", { "pos": coords })
                     else:
                         if(isOver((ATTACK_BUTTON_X, ATTACK_BUTTON_Y ), screenCoords) ):
@@ -63,6 +69,9 @@ class Client():
                     coords = mapCoords(pygame.mouse.get_pos())
                     screenCoords = pygame.mouse.get_pos()
                     print(coords)
+                elif not pygame.mouse.get_pressed()[0] and self.handleClick:
+                    self.handleClick = False
+                    print("ready for more clicks!")
                     
                 keystate = pygame.key.get_pressed()
 
