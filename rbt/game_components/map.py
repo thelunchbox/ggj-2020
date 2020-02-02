@@ -35,7 +35,7 @@ class Map():
         for x in range(MAP_WIDTH):
             for y in range(MAP_HEIGHT):
                 tiles[x][y].render(screen)
-
+                
     def update(self):
         pass
 

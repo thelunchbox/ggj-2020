@@ -5,6 +5,7 @@ from rbt.utils.utils import getId
 class ClientChannel(Channel):
     def __init__(self, *args, **kwargs):
         self.player = None
+        self.game = None
         Channel.__init__(self, *args, **kwargs)
 
     def Network(self, data):
@@ -19,3 +20,11 @@ class ClientChannel(Channel):
     def Network_addBot(self, data):
         # create a new bot with a number of ports
         self.player.create_bot(getId(), data['data']['ports'])
+
+    def Network_deployBot(self, data):
+        # get a bot from the player's inventory (or cheat in dev)
+        bot = self.player.create_bot(getId(), data['data']['ports'])
+        # and then add it to the tile at the coordinates specified
+        x = data['data']['x']
+        y = data['data']['y']
+        self.game.map.tiles[x][y].addEntity(bot)

@@ -12,6 +12,7 @@ class Tile():
 
     def addEntity(self, entity):
         self.gameEntities[entity.id] = entity
+        entity.pos = self.pos
     
     def removeEntity(self, entity):
         del self.gameEntities[entity.id]
