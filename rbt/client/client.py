@@ -1,4 +1,4 @@
-import pygame
+import pygame, objgraph
 import time
 from rbt.client.clientChannel import ClientChannel
 from rbt.game_components.game_state import GameState
@@ -65,6 +65,10 @@ class Client():
                     self.serverConnection.send("makeTool", {'toolType': 'build'})
                 elif keystate[pygame.K_8]:
                     self.serverConnection.send("makeTool", {'toolType': 'signal'})
+                elif keystate[pygame.K_9]:
+                    print("==============")
+                    objgraph.show_most_common_types(50)
+                    print("")
 
 
             ## Render the screen

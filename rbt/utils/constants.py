@@ -85,22 +85,22 @@ TILE_MAP = {
 }
 
 TILE_PATHS = [
-    "rbt/images/tiles/original/Vertical_64.png",
-    "rbt/images/tiles/original/Horizontal_64.png",
-    "rbt/images/tiles/original/L_Turn_64-3.png",
-    "rbt/images/tiles/original/L_Turn_64-2.png",
-    "rbt/images/tiles/original/L_Turn_64-1.png",
-    "rbt/images/tiles/original/L_Turn_64-4.png",
-    "rbt/images/tiles/original/T_Path_64-2.png",
-    "rbt/images/tiles/original/T_Path_64-1.png",
-    "rbt/images/tiles/original/T_Path_64-4.png",
-    "rbt/images/tiles/original/T_Path_64-3.png",
-    "rbt/images/tiles/original/4_Way_64.png",
-    "rbt/images/tiles/original/Blank_64.png",
-    "rbt/images/tiles/original/Dead_End_64_north.png",
-    "rbt/images/tiles/original/Dead_End_64_south.png",
-    "rbt/images/tiles/original/Dead_End_64_east.png",
-    "rbt/images/tiles/original/Dead_End_64_west.png"
+    "rbt/images/tiles/goldEdgeTiles/Vertical_64.png",
+    "rbt/images/tiles/goldEdgeTiles/Horizontal_64.png",
+    "rbt/images/tiles/goldEdgeTiles/L_Turn_64-3.png",
+    "rbt/images/tiles/goldEdgeTiles/L_Turn_64-2.png",
+    "rbt/images/tiles/goldEdgeTiles/L_Turn_64-1.png",
+    "rbt/images/tiles/goldEdgeTiles/L_Turn_64-4.png",
+    "rbt/images/tiles/goldEdgeTiles/T_Path_64-2.png",
+    "rbt/images/tiles/goldEdgeTiles/T_Path_64-1.png",
+    "rbt/images/tiles/goldEdgeTiles/T_Path_64-4.png",
+    "rbt/images/tiles/goldEdgeTiles/T_Path_64-3.png",
+    "rbt/images/tiles/goldEdgeTiles/4_Way_64.png",
+    "rbt/images/tiles/goldEdgeTiles/Blank_64.png",
+    "rbt/images/tiles/goldEdgeTiles/Dead_End_64_north.png",
+    "rbt/images/tiles/goldEdgeTiles/Dead_End_64_south.png",
+    "rbt/images/tiles/goldEdgeTiles/Dead_End_64_east.png",
+    "rbt/images/tiles/goldEdgeTiles/Dead_End_64_west.png"
 ]
 
 TILE_EXITS = [
