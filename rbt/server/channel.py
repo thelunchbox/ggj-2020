@@ -27,7 +27,8 @@ class ClientChannel(Channel):
         #### DEV ONLY ####
         bot = self.player.create_bot(getId(), data['data']['ports'])
         # if we did not create a bot, we were out of resources
-        if (not bot) return False
+        if (not bot):
+            return False
         #### DEV ONLY ####
 
         # and then add it to the tile at the coordinates specified
