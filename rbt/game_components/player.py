@@ -42,25 +42,13 @@ class Player(pygame.sprite.Sprite):
                 return bot
 
     def update(self):
-        for bot in self.bots:
-            bot.update()
-            if (bot.pos[1] > 1020 or bot.pos[1] < 0):
-                bot.dead = True
-
-        for bot in self.bots:
-            if (bot.dead):
-                self.bots.remove(bot)
+        pass
 
     def getState(self):
-        botStates = {}
-        for bot in self.bots:
-            botStates[bot.id] = bot.getState()
-
         return {
             "id": self.id,
             "pos": self.pos,
             "resource": self.resource,
-            "bots": botStates
         }
 
     def captureInput(self, inputs):
@@ -68,24 +56,7 @@ class Player(pygame.sprite.Sprite):
 
     def render(self, screen):
         self.circle.render(screen, self.pos)
-        for bot in self.bots:
-            bot.render(screen)
 
-
-    def setPlayerFromState(self, playerState):
-        # create any new player that doesn't exist
-        allBots = playerState['bots']
-        for botID in allBots.keys():
-            if (not self.get_bot(botID)):
-                bot = Bot(botID, allBots[botID]['slots'], self.id)
-                bot.set_color((0,255,0))
-                self.bots.append(bot)
-
-        for bot in self.bots:
-            if (not allBots.get(bot.id, False)):
-                self.bots.remove(bot)
-            else:
-                bot.setBotFromState(allBots[bot.id])
-
+    def setFromState(self, playerState):
         self.pos = playerState['pos']
         self.resource = playerState['resource']

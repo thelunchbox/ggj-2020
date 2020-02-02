@@ -8,7 +8,7 @@ class Resistor(map_entities.Map_Entities):
     
     # Requires a position, unique Resistor ID and a value (number of Resistor units)    
     def __init__(self, pos, id, value):
-        super(Resistor, self).set_pos(pos, 'resistor')
+        super(Resistor, self).set_pos(pos, 'Resistor')
         self.surface = pygame.Surface((30,30))
         self.surface.fill((168,30,20))
         self.id = id
@@ -29,7 +29,8 @@ class Resistor(map_entities.Map_Entities):
         else:
             return {
                 'pos': self.pos,
-                'resistance': self.value
+                'resistance': self.value,
+                'type': self.type
             }
 
     def update(self):

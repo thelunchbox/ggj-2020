@@ -33,6 +33,7 @@ class Bot():
 
         return {
             'id': self.id,
+            'type': 'Bot',
             'slots': self.slots,
             'ttl': self.ttl,
             'inventory': inventoryState,
@@ -41,7 +42,7 @@ class Bot():
             'owner': self.owner
         }
 
-    def setBotFromState(self, botState):
+    def setFromState(self, botState):
         self.slots = botState['slots']
         self.ttl = botState['ttl']
         self.material = botState['material']
@@ -60,6 +61,8 @@ class Bot():
         self.move()
         self.ttl -= SIGNAL_DECAY
         if (self.ttl <= 0):
+            self.dead = True
+        if (self.pos[1] > 1020 or self.pos[1] < 0): #TODO: fix me
             self.dead = True
 
     def render(self, screen):
