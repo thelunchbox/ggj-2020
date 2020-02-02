@@ -34,6 +34,9 @@ class Tile():
         for entity in self.gameEntities:
             entity.render(screen)
 
+    def getBackground(self):
+        return self.surface
+
     def setFromState(self, state):
         entityStates = state['entities']
 

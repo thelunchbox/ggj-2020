@@ -1,6 +1,8 @@
 import socket
 import uuid
 
+from constants import TILE_WIDTH, TILE_HEIGHT, MAP_BORDER
+
 def getHostAddr():
     # hostname = socket.gethostname()
     # return socket.gethostbyname(hostname)
@@ -15,3 +17,7 @@ def getId():
 
 def getClassName(x):
     return x.__class__.__name__
+
+
+def screenCoords((x,y)):
+    return ((TILE_WIDTH*x)+(MAP_BORDER/2),(TILE_HEIGHT*y)+(MAP_BORDER/2),TILE_WIDTH,TILE_HEIGHT)

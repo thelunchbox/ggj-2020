@@ -6,6 +6,7 @@ from rbt.utils.constants import MAP_HEIGHT
 from rbt.utils.constants import TILE_WIDTH
 from rbt.utils.constants import TILE_HEIGHT
 from rbt.utils.constants import MAP_BORDER, MAP_MARGIN
+from rbt.utils.utils import screenCoords
 from rbt.game_components.tile import Tile
 board = []
 
@@ -25,12 +26,15 @@ class Map():
         for x in range(MAP_WIDTH):
             self.tiles.append([])
             for y in range(MAP_HEIGHT):
-                #self.tiles[x].append(TILE_SURFACES[tiles[y][x]])
                 self.tiles[x].append(Tile([tiles[y][x]], (x,y), {}})
-                #self.surface.blit(self.board[x][y],((TILE_WIDTH*x)+(MAP_BORDER/2),(TILE_HEIGHT*y)+(MAP_BORDER/2),TILE_WIDTH,TILE_HEIGHT))
+                self.surface.blit(self.tiles[x][y].getBackground(), screenCoords((x,y))
 
     def render(self, screen):
-        screen.blit(self.surface, (MAP_MARGIN, 0))
+        screen.blit(self.surface, (0, 0))
+
+        for x in range(MAP_WIDTH):
+            for y in range(MAP_HEIGHT):
+                tiles[x][y].render(screen)
 
     def update(self):
         pass
