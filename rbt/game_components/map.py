@@ -7,7 +7,7 @@ from rbt.utils.constants import TILE_WIDTH
 from rbt.utils.constants import TILE_HEIGHT
 from rbt.utils.constants import MAP_BORDER
 from rbt.utils.constants import SPAWN_POINTS
-from rbt.utils.utils import screenCoords, mapCoords, getId
+from rbt.utils.utils import screenCoords, mapCoords, getId, getClassName
 from rbt.game_components.tile import Tile
 from rbt.game_components.spawn import Spawn
 board = []
@@ -39,6 +39,15 @@ class Map():
             tile = self.tiles[t[0]][t[1]]
             spawn = Spawn(t, getId(), owner)
             tile.addEntity(spawn)
+
+    def isSpawn(self, t, p):
+        tile = self.tiles[t[0]][t[1]]
+        spawn = tile.contains('Spawn')
+        if not spawn:
+            return False
+        else:
+            print(spawn.player, p)
+            return spawn.player == p
 
     def render(self, screen):
         screen.blit(self.surface, (0, 0))

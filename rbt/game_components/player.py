@@ -51,7 +51,7 @@ class Player(pygame.sprite.Sprite):
         toolStates = {}
 
         for bot in self.bots:
-            botStates[bot.botID] = bot.getState()
+            botStates[bot.id] = bot.getState()
         for tool in self.tools:
             toolStates[tool.id] = tool.getState()
             

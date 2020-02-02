@@ -34,16 +34,21 @@ class Tile():
                         b.interact(a)
     
     def render(self, screen, hover):
+        for entity in self.gameEntities.values():
+            entity.render(screen)
         if hover:
             xy = screenCoords(self.pos)
             pygame.draw.rect(screen, COLOR['cyan'], (xy[0], xy[1], 64, 64), 2)
 
-        for entity in self.gameEntities.values():
-            print('rendering entity', getClassName(entity), entity.id)
-            entity.render(screen)
-
     def getBackground(self):
         return self.surface
+
+    # look for entities
+    def contains(self, entityType):
+        for x in self.gameEntities.values():
+            if getClassName(x) == entityType:
+                return x
+        return None
 
     def setFromState(self, state):
         entityStates = state['entities']
